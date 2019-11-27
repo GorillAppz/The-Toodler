@@ -1,6 +1,6 @@
 {
     "env": {
-        "node": true,
+        "browser": true,
         "es6": true
     },
     "extends": [
@@ -11,7 +11,6 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -20,13 +19,43 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "@typescript-eslint"
+        "react"
     ],
     "rules": {
-        "no-trailing-spaces": 2,
-        "indent": ["error", "tab"],
-		"no-tabs": ["error", { "allowIndentationTabs": true }],
-		"comma-dangle": ["error", "never"]
+        "indent": [
+            2,
+            "tab",
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "react/jsx-indent": [
+            2,
+            "tab"
+        ],
+        "react/jsx-indent-props": [
+            2,
+            "tab"
+        ],
+        "no-tabs": [
+            "error",
+            {
+                "allowIndentationTabs": true
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "eol-last": [
+            "error",
+            "never"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 120
+            }
+        ]
     }
 }

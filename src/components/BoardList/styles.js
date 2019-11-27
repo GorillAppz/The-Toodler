@@ -4,7 +4,7 @@ export default StyleSheet.create({
 	list: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'center'
 	},
 	button: {
 		borderRadius: 10,
@@ -14,7 +14,7 @@ export default StyleSheet.create({
 		shadowRadius: 3,
 		height: 45,
 		backgroundColor: '#000',
-		borderColor: '#fff',
+		borderColor: '#fff'
 	},
 	card: {
 		height: 260,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
 		alignSelf: 'center',
 		marginTop: 15,
 		fontSize: 25,
-		fontFamily: 'Palatino',
+		fontFamily: 'Palatino, Roboto',
 		fontWeight: 'bold'
 	}
 });
