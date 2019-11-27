@@ -7,8 +7,9 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-	"strict": true,
+	"strict": false,
 	"noUnusedLocals": true,
-	"noImplicitReturns": true
-  }
+	"noImplicitReturns": true,
+	"noImplicitAny": false,
+	},
 }
