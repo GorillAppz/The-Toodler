@@ -26,7 +26,7 @@ export default StyleSheet.create({
 		alignSelf: 'center',
 		marginTop: 15,
 		fontSize: 25,
-		fontFamily: 'Palatino, Roboto',
+		fontFamily: 'Arial',
 		fontWeight: 'bold'
 	}
 });
