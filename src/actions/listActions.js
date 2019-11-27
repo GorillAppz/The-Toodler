@@ -2,15 +2,21 @@ import * as constants from '../constants';
 
 export const createList = (list) => ({
 	type: constants.CREATE_LIST,
-	list
+	payload: {
+		list
+	}
 });
 
 export const deleteList = (id) => ({
 	type: constants.DELETE_LIST,
-	id
+	payload: {
+		id
+	}
 });
 
 export const updateList = (list) => ({
 	type: constants.UPDATE_LIST,
-	list
+	payload: {
+		list
+	}
 });

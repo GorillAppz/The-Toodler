@@ -2,16 +2,21 @@ import * as constants from '../constants';
 
 export const createBoard = (board) => ({
 	type: constants.CREATE_BOARD,
-	board
+	payload: {
+		board
+	}
 });
 
-export const deleteBoard = (id, lists) => ({
+export const deleteBoard = (id) => ({
 	type: constants.DELETE_BOARD,
-	id,
-	lists
+	payload: {
+		id
+	}
 });
 
 export const updateBoard = (board) => ({
 	type: constants.UPDATE_BOARD,
-	board
+	payload: {
+		board
+	}
 });
