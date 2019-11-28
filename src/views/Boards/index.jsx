@@ -1,12 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import BoardList from '../../components/BoardList';
-import data from '../../resources/data.json';
 import styles from './styles';
 
 const Boards = () => (
 	<View style={styles.main}>
-		<BoardList boards={data.boards} />
+		<Text style={styles.title}>Tis are your boards</Text>
+		<BoardList />
 	</View>
 );
 
