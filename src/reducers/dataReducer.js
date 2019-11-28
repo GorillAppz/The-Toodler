@@ -61,7 +61,7 @@ export default (state = initState, action) => {
 		}
 		case constants.UPDATE_TASK: {
 			newState.tasks = newState.tasks
-				.map((task) => (task.id === payload.task.id ? { ...task, ...payload.task } : task));
+				.map((task) => (task.id === payload.task.id ? payload.task : task));
 			return newState;
 		}
 		case constants.MOVE_TASK: {

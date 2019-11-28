@@ -52,8 +52,4 @@ ListList.propTypes = {
 	).isRequired
 };
 
-const mapStateToProps = (state) => ({
-	boards: state.lists
-});
-
-export default connect(mapStateToProps)(ListList);
+export default connect(null)(ListList);

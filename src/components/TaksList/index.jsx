@@ -24,7 +24,7 @@ class TaskList extends React.Component {
 	}
 
 	render() {
-		const { tasks } = this.state;
+		const { tasks } = this.props;
 		return (
 			<View>
 				<Button
@@ -74,8 +74,4 @@ TaskList.propTypes = {
 	).isRequired
 };
 
-const mapStateToProps = (state) => ({
-	lists: state.tasks
-});
-
-export default connect(mapStateToProps, { updateTask })(TaskList);
+export default connect(null, { updateTask })(TaskList);
