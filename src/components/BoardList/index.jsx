@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, FlatList, Text } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import ImageThumbnail from '../ImageThumbnail';
+import { connect } from 'react-redux';
 import styles from './styles';
 import BoardItem from '../BoardItem';
 
 const BoardList = ({ boards }) => (
 	<View>
-		<Text style={styles.welcomeMessage}> Welcome </Text>
 		<FlatList
 			contentContainerStyle={styles.container}
 			data={boards}
@@ -30,4 +28,8 @@ BoardList.propTypes = {
 	).isRequired
 };
 
-export default BoardList;
+const mapStateToProps = (state) => ({
+	boards: state.boards
+});
+
+export default connect(mapStateToProps)(BoardList);
