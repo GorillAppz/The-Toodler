@@ -1,18 +1,14 @@
 import React from 'react';
-import Swipeout from 'react-native-swipeout';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 
 const ListItem = ({ data }) => {
-	const swipeoutBtns = [{ text: 'delete' }, { text: 'edit' }];
 	return (
-		<Swipeout right={swipeoutBtns}>
-			<View>
-				<Text>
-					{data.name}
-				</Text>
-			</View>
-		</Swipeout>
+		<View>
+			<Text>
+				{data.name}
+			</Text>
+		</View>
 	);
 };
 
