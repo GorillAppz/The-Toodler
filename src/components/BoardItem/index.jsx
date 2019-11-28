@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableHighlight, Button } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import style from './style';
+import styles from './styles';
 import ImageThumbnail from '../ImageThumbnail';
 import { deleteBoard } from '../../actions/boardActions';
+import OptionModal from '../OptionModal';
 
 const BoardItem = ({ data, deleteBoard, navigation: { navigate } }) => {
-	const [showDialog, toggleDialog] = useState(false);
+	const [showOptions, toggleOptions] = useState(false);
 
 	return (
 		<View>
 			<TouchableHighlight
-				onLongPress={() => toggleDialog(!showDialog)}
+				onLongPress={() => toggleOptions(true)}
 				onPress={() => navigate('Lists', { id: data.id })}
 			>
-				<View style={style.item}>
-					<ImageThumbnail thumbnailPhoto={data.thumbnailPhoto} style={style.thumbnail} />
-					<View style={style.nameWrapper}>
-						<Text style={style.name}>
+				<View style={styles.item}>
+					<ImageThumbnail thumbnailPhoto={data.thumbnailPhoto} style={styles.thumbnail} />
+					<View style={styles.nameWrapper}>
+						<Text style={styles.name}>
 							{data.name}
 						</Text>
 					</View>
 				</View>
 			</TouchableHighlight>
-			{
-				showDialog && (
-					<View>
-						<>
-							<Button title="Edit" />
-							<Button title="Delete" onPress={() => deleteBoard(data.id)} />
-						</>
-					</View>
-				)
-			}
+			<OptionModal
+				title={data.name}
+				isVisible={showOptions}
+				deleteHandler={() => { deleteBoard(data.id); toggleOptions(false); }}
+				editHandler={() => toggleOptions(false)}
+				cancelHandler={() => toggleOptions(false)}
+			/>
 		</View>
 	);
 };

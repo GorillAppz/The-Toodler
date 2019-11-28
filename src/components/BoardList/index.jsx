@@ -2,19 +2,28 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Text } from 'react-native-elements';
 import styles from './styles';
 import BoardItem from '../BoardItem';
 
 const BoardList = ({ boards }) => (
 	<View>
-		<FlatList
-			contentContainerStyle={styles.container}
-			data={boards}
-			renderItem={({ item }) => (
-				<BoardItem data={item} />
+		{boards.length
+			? (
+				<FlatList
+					contentContainerStyle={styles.container}
+					data={boards}
+					renderItem={({ item }) => (
+						<BoardItem data={item} />
+					)}
+					keyExtractor={(board) => board.name}
+				/>
+			)
+			: (
+				<Text h3>
+					You have no boards, add some!
+				</Text>
 			)}
-			keyExtractor={(board) => board.name}
-		/>
 	</View>
 );
 

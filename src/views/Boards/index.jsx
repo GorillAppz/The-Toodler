@@ -5,7 +5,6 @@ import styles from './styles';
 
 const Boards = () => (
 	<View style={styles.main}>
-		<Text style={styles.title}>Tis are your boards</Text>
 		<BoardList />
 	</View>
 );
