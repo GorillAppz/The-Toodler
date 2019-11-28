@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { Input, Button } from 'react-native-elements';
 import { View } from 'react-native';
-import styles from '../styles';
+import styles from './styles';
 
 const initState = {
 	fields: {
