@@ -11,5 +11,19 @@ export default StyleSheet.create({
 	},
 	name: {
 		fontSize: 20
+	},
+	modal: {
+		display: 'flex',
+		justifyContent: 'space-around',
+		height: 400
+	},
+	button: {
+		padding: 25
+	},
+	delete: {
+		backgroundColor: 'red'
+	},
+	edit: {
+		backgroundColor: 'green'
 	}
 });
