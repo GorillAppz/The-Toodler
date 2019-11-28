@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ListItem from '../ListItem';
@@ -16,17 +17,27 @@ const ListList = ({ lists }) => (
 			buttonStyle={styles.addButton}
 			title="Add List"
 		/>
-		<Text>
-			{`Board #${lists.boardId}`}
-		</Text>
-		<FlatList
-			contentContainerStyle={styles.container}
-			data={lists}
-			renderItem={({ item }) => (
-				<ListItem data={item} />
+		{lists.length
+			? (
+				<View>
+					<Text>
+						{`Board #${lists[0].boardId}`}
+					</Text>
+					<FlatList
+						contentContainerStyle={styles.container}
+						data={lists}
+						renderItem={({ item }) => (
+							<ListItem data={item} />
+						)}
+						keyExtractor={(task) => task.name}
+					/>
+				</View>
+			)
+			: (
+				<Text h3>
+					You have no lists, add some!
+				</Text>
 			)}
-			keyExtractor={(list) => list.name}
-		/>
 	</View>
 );
 
@@ -41,4 +52,8 @@ ListList.propTypes = {
 	).isRequired
 };
 
-export default ListList;
+const mapStateToProps = (state) => ({
+	boards: state.lists
+});
+
+export default connect(mapStateToProps)(ListList);

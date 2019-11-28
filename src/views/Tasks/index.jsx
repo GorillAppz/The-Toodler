@@ -2,31 +2,32 @@ import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ListList from '../../components/ListList';
+import TaskList from '../../components/TaksList';
 import styles from './styles';
 
-const Lists = ({ navigation, lists }) => {
+const Tasks = ({ navigation, tasks }) => {
 	const { id } = navigation.state.params;
 	return (
 		<View style={styles.main}>
-			<ListList lists={lists.filter((list) => list.boardId === id)} />
+			<TaskList tasks={tasks.filter((task) => task.listId === id)} />
 		</View>
 	);
 };
 
-Lists.propTypes = {
-	lists: PropTypes.arrayOf(
+Tasks.propTypes = {
+	tasks: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
 			name: PropTypes.string.isRequired,
-			color: PropTypes.string.isRequired,
-			boardId: PropTypes.number.isRequired
+			description: PropTypes.string.isRequired,
+			isFinished: PropTypes.bool.isRequired,
+			listId: PropTypes.number.isRequired
 		}).isRequired
 	).isRequired
 };
 
 const mapStateToProps = (state) => ({
-	lists: state.lists
+	tasks: state.tasks
 });
 
-export default connect(mapStateToProps)(Lists);
+export default connect(mapStateToProps)(Tasks);
