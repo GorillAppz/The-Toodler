@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import styles from './styles';
 import BoardItem from '../BoardItem';
 
@@ -10,14 +10,16 @@ const BoardList = ({ boards }) => (
 	<View>
 		{boards.length
 			? (
-				<FlatList
-					contentContainerStyle={styles.container}
-					data={boards}
-					renderItem={({ item }) => (
-						<BoardItem data={item} />
-					)}
-					keyExtractor={(board) => board.name}
-				/>
+				<View>
+					<FlatList
+						contentContainerStyle={styles.container}
+						data={boards}
+						renderItem={({ item }) => (
+							<BoardItem data={item} />
+						)}
+						keyExtractor={(board) => `${board.name}_${board.id}`}
+					/>
+				</View>
 			)
 			: (
 				<Text h3>

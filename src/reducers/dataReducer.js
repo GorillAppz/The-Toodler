@@ -10,7 +10,7 @@ export default (state = initState, action) => {
 		case constants.CREATE_BOARD: {
 			const highest = state.boards.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
 			const nextId = highest ? highest + 1 : 1;
-			newState.boards.push({ ...payload.board, id: nextId });
+			newState.boards = [...newState.boards, { ...payload.board, id: nextId }];
 			return newState;
 		}
 		case constants.DELETE_BOARD: {
@@ -34,7 +34,7 @@ export default (state = initState, action) => {
 		case constants.CREATE_LIST: {
 			const highest = state.lists.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
 			const nextId = highest ? highest + 1 : 1;
-			newState.lists.push({ ...payload.list, id: nextId });
+			newState.lists = [...newState.lists, { ...payload.list, id: nextId }];
 			return newState;
 		}
 		case constants.DELETE_LIST: {
@@ -52,7 +52,7 @@ export default (state = initState, action) => {
 		case constants.CREATE_TASK: {
 			const highest = state.tasks.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
 			const nextId = highest ? highest + 1 : 1;
-			newState.tasks.push({ ...payload.task, id: nextId });
+			newState.tasks = [...newState.tasks, { ...payload.task, id: nextId }];
 			return newState;
 		}
 		case constants.DELETE_TASK: {
