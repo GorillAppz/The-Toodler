@@ -20,7 +20,8 @@ const MainNavigator = createStackNavigator(
 			headerTintColor: '#fff',
 			headerTitleStyle: {
 				fontWeight: 'bold'
-			}
+			},
+			title: 'Toodler - Todo App!'
 		}
 	}
 );

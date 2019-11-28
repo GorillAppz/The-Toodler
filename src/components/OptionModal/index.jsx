@@ -2,8 +2,6 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-elements';
 import { View } from 'react-native';
-
-
 import styles from './styles';
 
 const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler }) => (
