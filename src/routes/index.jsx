@@ -2,16 +2,16 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Boards from '../views/Boards';
 import Lists from '../views/Lists';
-import Tasks from '../views/Tasks';
+import Main from '../views/Main';
 
 const MainNavigator = createStackNavigator(
 	{
+		Main: { screen: Main },
 		Boards: { screen: Boards },
-		Lists: { screen: Lists },
-		Tasks: { screen: Tasks }
+		Lists: { screen: Lists }
 	},
 	{
-		initialRouteName: 'Boards',
+		initialRouteName: 'Main',
 		/* The header config from HomeScreen is now here */
 		defaultNavigationOptions: {
 			headerStyle: {
