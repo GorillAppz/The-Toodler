@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	emptyMessage: {
-		color: 'grey',
+	emptyBoardText: {
+		alignSelf: 'center',
+		marginVertical: '50%',
+		color: 'gray',
 		textAlign: 'center'
-	},
+	}
 });

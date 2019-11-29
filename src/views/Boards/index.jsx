@@ -7,6 +7,7 @@ import BoardFormModal from '../../components/BoardFormModal';
 import { createBoard } from '../../actions/boardActions';
 
 import styles from './styles';
+import { createBoardType } from '../../types/index';
 
 const Boards = ({ createBoard }) => {
 	const [showForm, setFormVisibility] = useState(false);
@@ -24,7 +25,7 @@ const Boards = ({ createBoard }) => {
 					onPressOut={() => setFormVisibility(true)}
 					buttonStyle={styles.addButton}
 					iconRight
-					icon={{ name: 'add-circle', color: 'white', size: 75 }}
+					icon={{ name: 'add-circle', color: 'white', size: 65 }}
 				/>
 			</View>
 
@@ -36,6 +37,10 @@ const Boards = ({ createBoard }) => {
 			/>
 		</View>
 	);
+};
+
+Boards.propTypes = {
+	createBoard: createBoardType.isRequired
 };
 
 export default connect(null, { createBoard })(Boards);

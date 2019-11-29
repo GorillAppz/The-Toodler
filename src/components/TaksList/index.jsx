@@ -1,77 +1,68 @@
-import React from 'react';
-import { View, FlatList, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import PropTypes from 'prop-types';
 import TaskItem from '../TaskItem';
 import { updateTask } from '../../actions/taskActions';
 import styles from './styles';
+import { tasksType, updateTaskType, numberType } from '../../types';
 
-class TaskList extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			tasks: props.tasks
-		};
-	}
+const TaskList = ({ tasks, updateTask, listId }) => {
+	const filteredTasks = tasks.filter((t) => t.listId === listId);
+	const [fadeAnim] = useState(new Animated.Value(0));
 
-	updateIsFinished(id) {
-		const { tasks } = this.state;
-		const { updateTask } = this.props;
+	useEffect(() => {
+		Animated.timing(
+			fadeAnim,
+			{
+				toValue: 1,
+				duration: 500
+			}
+		).start();
+	}, []);
+
+	const updateIsFinishedHandler = (id) => {
 		const newTask = tasks.find((task) => task.id === id);
 		newTask.isFinished = !newTask.isFinished;
 		updateTask(newTask);
-	}
+	};
 
-	render() {
-		const { tasks } = this.props;
-		return (
-			<View>
-				<Button
-					icon={{
-						name: 'add-circle-outline',
-						size: 20,
-						color: 'white'
-					}}
-					buttonStyle={styles.addButton}
-					title="Add Task"
-				/>
-				{tasks.length
-					? (
-						<View>
-							<Text>
-								{`List #${tasks[0].listId}`}
-							</Text>
-							<FlatList
-								contentContainerStyle={styles.container}
-								data={tasks}
-								renderItem={({ item }) => (
-									<TaskItem data={item} updateIsFinished={(id) => this.updateIsFinished(id)} />
-								)}
-								keyExtractor={(task) => task.name}
-							/>
-						</View>
-					)
-					: (
-						<Text h3>
-							You have no tasks, add some!
-						</Text>
-					)}
-			</View>
-		);
-	}
-}
 
-TaskList.propTypes = {
-	tasks: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			name: PropTypes.string.isRequired,
-			description: PropTypes.string.isRequired,
-			isFinished: PropTypes.bool.isRequired,
-			listId: PropTypes.number.isRequired
-		}).isRequired
-	).isRequired
+	return (
+		<Animated.View style={{ opacity: fadeAnim }}>
+			<Button
+				onPressOut={() => true}
+				buttonStyle={styles.addButton}
+				iconRight
+				icon={{ name: 'add-circle', color: 'white', size: 15 }}
+				title="New Task"
+				titleStyle={styles.addButtonTitle}
+			/>
+			<FlatList
+				contentContainerStyle={styles.container}
+				data={filteredTasks}
+				renderItem={({ item }) => (
+					<TaskItem task={item} updateIsFinished={(id) => updateIsFinishedHandler(id)} />
+				)}
+				keyExtractor={(task) => task.name}
+				ListEmptyComponent={(
+					<Text h3>
+						You have no tasks, add some!
+					</Text>
+				)}
+			/>
+		</Animated.View>
+	);
 };
 
-export default connect(null, { updateTask })(TaskList);
+TaskList.propTypes = {
+	tasks: tasksType.isRequired,
+	updateTask: updateTaskType.isRequired,
+	listId: numberType.isRequired
+};
+
+const mapStateToProps = (state) => ({
+	tasks: state.tasks
+});
+
+export default connect(mapStateToProps, { updateTask })(TaskList);

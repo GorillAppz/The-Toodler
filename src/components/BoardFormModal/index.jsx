@@ -3,8 +3,8 @@ import Modal from 'react-native-modal';
 import { Input, Button, Text } from 'react-native-elements';
 import { View } from 'react-native';
 import styles from './styles';
-
 import ThumbnailInput from '../ThumbnailInput';
+import { boardType, submitHandlerType, cancelHandlerType, isVisibleType, stringType } from '../../types';
 
 const initState = {
 	fields: {
@@ -26,9 +26,9 @@ class BoardFormModal extends React.Component {
 	}
 
 	setStateOnModalShow() {
-		const { prevData } = this.props;
-		if (prevData) {
-			this.setState({ fields: prevData });
+		const { prevBoard } = this.props;
+		if (prevBoard) {
+			this.setState({ fields: prevBoard });
 		} else {
 			this.setState({ ...initState });
 		}
@@ -115,5 +115,13 @@ class BoardFormModal extends React.Component {
 		);
 	}
 }
+
+BoardFormModal.propTypes = {
+	prevBoard: boardType,
+	submitHandler: submitHandlerType.isRequired,
+	cancelHandler: cancelHandlerType.isRequired,
+	isVisible: isVisibleType.isRequired,
+	title: stringType.isRequired
+};
 
 export default BoardFormModal;

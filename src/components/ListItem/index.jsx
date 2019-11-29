@@ -2,31 +2,39 @@ import React, { useState } from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import PropTypes from 'prop-types';
+import { Icon } from 'react-native-elements';
+import tinyColor from 'tinycolor2';
 import styles from './styles';
 import { deleteList } from '../../actions/listActions';
 import OptionModal from '../OptionModal';
+import { deleteListType, listType, funcType, boolType } from '../../types';
+import TaskList from '../TaksList/index';
 
-const ListItem = ({ data, deleteList, navigation: { navigate } }) => {
+const ListItem = ({ list, deleteList, expandHandler, expanded }) => {
 	const [showOptions, toggleOptions] = useState(false);
+
+	const getTextColor = () => (tinyColor(list.color).isDark() ? 'white' : 'black');
+
 	return (
-		<View>
+		<View style={styles.container}>
 			<TouchableHighlight
 				onLongPress={() => toggleOptions(true)}
-				onPress={() => navigate('Tasks', { id: data.id })}
+				onPress={() => expandHandler(list.id)}
 			>
-				<View style={styles.item}>
+				<View style={{ backgroundColor: list.color }}>
 					<View style={styles.nameWrapper}>
-						<Text style={styles.name}>
-							{data.name}
+						<Text style={{ ...styles.name, color: getTextColor() }}>
+							{list.name}
 						</Text>
+						<Icon name="caret-down" type="font-awesome" color={getTextColor()} />
 					</View>
 				</View>
 			</TouchableHighlight>
+			{expanded ? <TaskList listId={list.id} /> : null }
 			<OptionModal
-				title={data.name}
+				title={list.name}
 				isVisible={showOptions}
-				deleteHandler={() => { deleteList(data.id); toggleOptions(false); }}
+				deleteHandler={() => { deleteList(list.id); toggleOptions(false); }}
 				editHandler={() => toggleOptions(false)}
 				cancelHandler={() => toggleOptions(false)}
 			/>
@@ -36,12 +44,10 @@ const ListItem = ({ data, deleteList, navigation: { navigate } }) => {
 
 
 ListItem.propTypes = {
-	data: PropTypes.shape({
-		id: PropTypes.number.isRequired,
-		name: PropTypes.string.isRequired,
-		color: PropTypes.string.isRequired,
-		boardId: PropTypes.number.isRequired
-	}).isRequired
+	list: listType.isRequired,
+	deleteList: deleteListType.isRequired,
+	expandHandler: funcType.isRequired,
+	expanded: boolType.isRequired
 };
 
 export default connect(null, { deleteList })(withNavigation(ListItem));

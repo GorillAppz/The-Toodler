@@ -1,58 +1,69 @@
-import React from 'react';
-import { View, FlatList, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, FlatList, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
-import PropTypes from 'prop-types';
+import { Text } from 'react-native-elements';
 import ListItem from '../ListItem';
 import styles from './styles';
 import ListFormModal from '../ListFormModal';
+import { listsType, numberType, boardsType } from '../../types';
 
-const ListList = ({ lists }) => (
-	<View>
-		<Button
-			icon={{
-				name: 'add-circle-outline',
-				size: 20,
-				color: 'white'
-			}}
-			buttonStyle={styles.addButton}
-			title="Add List"
+const ListList = ({ boardId, lists, boards }) => {
+	const [taskListToExpand, setTaskListToExpand] = useState(null);
 
-		/>
-		{lists.length
-			? (
-				<View>
-					<Text>
-						{`Board #${lists[0].boardId}`}
+	const expandListHandler = (listId) => {
+		if (listId === taskListToExpand) {
+			setTaskListToExpand(null);
+		} else {
+			setTaskListToExpand(listId);
+		}
+	};
+
+	const filteredLists = lists.filter((list) => list.boardId === boardId);
+	const board = boards.find((b) => b.id === boardId);
+	return (
+		<View>
+			<ScrollView>
+				<View style={styles.header}>
+					<Image source={{ uri: board.thumbnailPhoto }} resizeMode="cover" style={styles.thumbnail} />
+					<Text style={styles.boardName}>
+						{board.name}
 					</Text>
-					<FlatList
-						contentContainerStyle={styles.container}
-						data={lists}
-						renderItem={({ item }) => (
-							<ListItem data={item} />
-						)}
-						keyExtractor={(task) => task.name}
-					/>
+					<Text style={styles.boardDescription}>
+						{board.description}
+					</Text>
 				</View>
-			)
-			: (
-				<Text h3>
-					You have no lists, add some!
-				</Text>
-			)}
-		<ListFormModal />
-	</View>
-);
-
-ListList.propTypes = {
-	lists: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			name: PropTypes.string.isRequired,
-			color: PropTypes.string.isRequired,
-			boardId: PropTypes.number.isRequired
-		}).isRequired
-	).isRequired
+				<FlatList
+					contentContainerStyle={styles.container}
+					data={filteredLists}
+					renderItem={({ item }) => (
+						<ListItem
+							list={item}
+							expandHandler={(listId) => expandListHandler(listId)}
+							expanded={(taskListToExpand === item.id)}
+						/>
+					)}
+					keyExtractor={(task) => task.name}
+					ListEmptyComponent={(
+						<Text h3 style={styles.emptyListText}>
+							You have no lists... Add one!
+						</Text>
+					)}
+				/>
+			</ScrollView>
+			<ListFormModal />
+		</View>
+	);
 };
 
-export default connect(null)(ListList);
+ListList.propTypes = {
+	lists: listsType.isRequired,
+	boardId: numberType.isRequired,
+	boards: boardsType.isRequired
+};
+
+const mapStateToProps = (state) => ({
+	boards: state.boards,
+	lists: state.lists
+});
+
+export default connect(mapStateToProps)(ListList);

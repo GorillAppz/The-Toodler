@@ -23,5 +23,14 @@ export default StyleSheet.create({
 	title: {
 		color: 'grey',
 		textAlign: 'center'
+	},
+	colorPickerTitle: {
+		textAlign: 'center',
+		color: 'gray',
+		fontWeight: 'bold',
+		marginTop: 5
+	},
+	colorPicker: {
+		height: 250
 	}
 });

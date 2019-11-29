@@ -3,10 +3,10 @@ import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const ImageThumbnail = ({ thumbnailPhoto, style }) => (
-	<View style={style}>
+const ImageThumbnail = ({ thumbnailPhoto, style, height, width }) => (
+	<View>
 		<Image
-			style={styles.image}
+			style={{ ...style, height, width }}
 			resizeMode="cover"
 			source={{ uri: thumbnailPhoto }}
 		/>

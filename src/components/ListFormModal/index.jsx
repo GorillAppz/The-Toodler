@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { Input, Button, Text } from 'react-native-elements';
 import { View } from 'react-native';
-import { TriangleColorPicker, fromHsv } from 'react-native-color-picker';
+import { ColorPicker, fromHsv } from 'react-native-color-picker';
 
 import styles from './styles';
 
@@ -10,7 +10,7 @@ const initState = {
 	fields: {
 		name: '',
 		description: '',
-		color: '',
+		color: 'blue',
 		boardId: null
 	},
 	errors: {
@@ -83,25 +83,17 @@ class ListFormModal extends React.Component {
 							onChangeText={(text) => this.inputHandler('name', text)}
 							containerStyle={styles.inputContainer}
 						/>
-
-
-						<Input
-							label="Description"
-							placeholder="Enter description (optional)"
-							value={fields.description}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.description}
-							maxLength={100}
-							multiline
-							onChangeText={(text) => this.inputHandler('description', text)}
-							containerStyle={styles.inputContainer}
-						/>
-
-						<TriangleColorPicker
-							color={fields.color}
-							onColorChange={(value) => this.colorChangeHandler(value)}
-							style={{ height: 200 }}
-						/>
+						<View>
+							<Text h5 style={styles.colorPickerTitle}>
+								Choose your List Color
+							</Text>
+							<ColorPicker
+								color={fields.color}
+								onColorChange={(value) => this.colorChangeHandler(value)}
+								style={styles.colorPicker}
+								hideSliders
+							/>
+						</View>
 
 						<View style={styles.buttonsContainer}>
 							<Button title="Cancel" onPress={() => cancelHandler()} />

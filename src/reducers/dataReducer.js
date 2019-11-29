@@ -8,7 +8,7 @@ export default (state = initState, action) => {
 	const { payload, type } = action;
 	switch (type) {
 		case constants.CREATE_BOARD: {
-			const highest = state.boards.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
+			const highest = Math.max(...state.boards.map((x) => x.id), null);
 			const nextId = highest ? highest + 1 : 1;
 			newState.boards = [...newState.boards, { ...payload.board, id: nextId }];
 			return newState;
@@ -32,11 +32,9 @@ export default (state = initState, action) => {
 			return newState;
 		}
 		case constants.CREATE_LIST: {
-			console.log("YO");
-			const highest = state.lists.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
+			const highest = Math.max(...state.lists.map((x) => x.id), null);
 			const nextId = highest ? highest + 1 : 1;
 			newState.lists = [...newState.lists, { ...payload.list, id: nextId }];
-			console.log(newState.lists);
 			return newState;
 		}
 		case constants.DELETE_LIST: {
@@ -52,7 +50,7 @@ export default (state = initState, action) => {
 			return newState;
 		}
 		case constants.CREATE_TASK: {
-			const highest = state.tasks.sort((a, b) => ((a.id < b.id) ? 1 : -1))[0].id;
+			const highest = Math.max(...state.tasks.map((x) => x.id), null);
 			const nextId = highest ? highest + 1 : 1;
 			newState.tasks = [...newState.tasks, { ...payload.task, id: nextId }];
 			return newState;

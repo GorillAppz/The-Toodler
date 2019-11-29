@@ -4,19 +4,35 @@ export default StyleSheet.create({
 	container: {
 		display: 'flex'
 	},
-	addButton: {
-		backgroundColor: 'green',
-		height: 30,
-		width: 120,
-		alignItems: 'center',
-		display: 'flex',
-		alignSelf: 'flex-end',
-		borderRadius: 5,
-		borderWidth: 1,
-		borderColor: '#013222',
-		margin: 10,
-		padding: 1,
-		shadowColor: '#013222',
-		shadowOpacity: 0.5
+	boardName: {
+		fontWeight: 'bold',
+		fontSize: 20,
+		alignSelf: 'center',
+		margin: 10
+	},
+	boardDescription: {
+		fontSize: 12,
+		fontWeight: 'normal',
+		alignSelf: 'center',
+		paddingHorizontal: 8,
+		marginTop: -10,
+		textAlign: 'center'
+	},
+	thumbnail: {
+		alignSelf: 'center',
+		height: 70,
+		width: 70,
+		borderRadius: 15
+	},
+	header: {
+		borderBottomWidth: 1,
+		borderColor: 'lightgray',
+		paddingVertical: 5
+	},
+	emptyListText: {
+		alignSelf: 'center',
+		marginVertical: '50%',
+		color: 'gray',
+		textAlign: 'center'
 	}
 });

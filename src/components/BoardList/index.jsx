@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import styles from './styles';
 import BoardItem from '../BoardItem';
+import { boardsType } from '../../types';
 
 const BoardList = ({ boards }) => (
 	<View>
@@ -12,12 +12,12 @@ const BoardList = ({ boards }) => (
 			data={boards}
 			contentContainerStyle={{ flex: 1 }}
 			renderItem={({ item }) => (
-				<BoardItem data={item} />
+				<BoardItem board={item} />
 			)}
 			keyExtractor={(board) => `${board.name}_${board.id}`}
 			ListEmptyComponent={(
-				<Text h3 style={styles.emptyMessage}>
-					You have no boards... Create one!
+				<Text h3 style={styles.emptyBoardText}>
+					You have no boards... Add one!
 				</Text>
 			)}
 		/>
@@ -25,13 +25,7 @@ const BoardList = ({ boards }) => (
 );
 
 BoardList.propTypes = {
-	boards: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			name: PropTypes.string.isRequired,
-			thumbnailPhoto: PropTypes.string.isRequired
-		}).isRequired
-	).isRequired
+	boards: boardsType.isRequired
 };
 
 const mapStateToProps = (state) => ({

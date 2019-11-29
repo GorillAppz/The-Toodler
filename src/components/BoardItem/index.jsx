@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
-import ImageThumbnail from '../ImageThumbnail';
 import { deleteBoard, updateBoard } from '../../actions/boardActions';
 import OptionModal from '../OptionModal';
 import BoardFormModal from '../BoardFormModal';
+import { boardType, deleteBoardType, updateBoardType } from '../../types';
 
 const BoardItem = ({
-	data, deleteBoard, updateBoard, navigation: { navigate }
+	board, deleteBoard, updateBoard, navigation: { navigate }
 }) => {
 	const [activeModal, setActiveModal] = useState('');
 
@@ -17,9 +17,9 @@ const BoardItem = ({
 		if (activeModal === 'option') {
 			return (
 				<OptionModal
-					title={data.name}
-					isVisible={true}
-					deleteHandler={() => { deleteBoard(data.id); setActiveModal(''); }}
+					title={board.name}
+					isVisible
+					deleteHandler={() => { deleteBoard(board.id); setActiveModal(''); }}
 					editHandler={() => { setActiveModal('edit'); }}
 					cancelHandler={() => setActiveModal('')}
 				/>
@@ -31,7 +31,7 @@ const BoardItem = ({
 					isVisible
 					cancelHandler={() => setActiveModal('')}
 					submitHandler={(newBoard) => { updateBoard(newBoard); setActiveModal(''); }}
-					prevData={data}
+					prevBoard={board}
 					title="Editing Board"
 				/>
 			);
@@ -43,14 +43,17 @@ const BoardItem = ({
 		<View style={styles.boardItem}>
 			<TouchableHighlight
 				onLongPress={() => setActiveModal('option')}
-				onPress={() => navigate('Lists', { id: data.id })}
+				onPress={() => navigate('Lists', { id: board.id })}
 				underlayColor="rgba(0,0,0,0.1)"
 			>
 				<View style={styles.item}>
-					<ImageThumbnail thumbnailPhoto={data.thumbnailPhoto} style={styles.thumbnail} />
-					<View style={styles.nameWrapper}>
+					<Image source={{ uri: board.thumbnailPhoto }} style={styles.thumbnail} resizeMode="cover" />
+					<View style={styles.infoWrapper}>
 						<Text style={styles.name}>
-							{data.name}
+							{board.name}
+						</Text>
+						<Text style={styles.description}>
+							{board.description}
 						</Text>
 					</View>
 				</View>
@@ -59,5 +62,12 @@ const BoardItem = ({
 		</View>
 	);
 };
+
+BoardItem.propTypes = {
+	board: boardType.isRequired,
+	deleteBoard: deleteBoardType.isRequired,
+	updateBoard: updateBoardType.isRequired
+};
+
 
 export default connect(null, { deleteBoard, updateBoard })(withNavigation(BoardItem));

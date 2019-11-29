@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import PropTypes from 'prop-types';
 import ListList from '../../components/ListList';
 import styles from './styles';
 import ListFormModal from '../../components/ListFormModal';
 import { createList } from '../../actions/listActions';
+import { createListType } from '../../types';
 
-const Lists = ({ navigation, lists, createList }) => {
+const Lists = ({ navigation, createList }) => {
 	const { id } = navigation.state.params;
 
 	const [showForm, setFormVisibility] = useState(false);
@@ -16,15 +16,17 @@ const Lists = ({ navigation, lists, createList }) => {
 	const submitHandler = (data) => { createList(data); setFormVisibility(false); };
 
 	return (
-		<View style={styles.main}>
-			<ListList lists={lists.filter((list) => list.boardId === id)} />
+		<View style={styles.container}>
+			<ScrollView style={styles.main}>
+				<ListList boardId={id} />
+			</ScrollView>
 
 			<View style={styles.bottom}>
 				<Button
 					onPressOut={() => setFormVisibility(true)}
 					buttonStyle={styles.addButton}
 					iconRight
-					icon={{ name: 'add-circle', color: 'white', size: 75 }}
+					icon={{ name: 'add-circle', color: 'white', size: 65 }}
 				/>
 			</View>
 
@@ -40,18 +42,7 @@ const Lists = ({ navigation, lists, createList }) => {
 };
 
 Lists.propTypes = {
-	lists: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			name: PropTypes.string.isRequired,
-			color: PropTypes.string.isRequired,
-			boardId: PropTypes.number.isRequired
-		}).isRequired
-	).isRequired
+	createList: createListType.isRequired
 };
 
-const mapStateToProps = (state) => ({
-	lists: state.lists
-});
-
-export default connect(mapStateToProps, { createList })(Lists);
+export default connect(null, { createList })(Lists);
