@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ListItem from '../ListItem';
 import styles from './styles';
+import ListFormModal from '../ListFormModal';
 
 const ListList = ({ lists }) => (
 	<View>
@@ -16,6 +17,7 @@ const ListList = ({ lists }) => (
 			}}
 			buttonStyle={styles.addButton}
 			title="Add List"
+
 		/>
 		{lists.length
 			? (
@@ -38,6 +40,7 @@ const ListList = ({ lists }) => (
 					You have no lists, add some!
 				</Text>
 			)}
+		<ListFormModal />
 	</View>
 );
 

@@ -4,7 +4,7 @@ import { Button, Text } from 'react-native-elements';
 import { View } from 'react-native';
 import styles from './styles';
 
-const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler }) => (
+const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler, editModal }) => (
 	<Modal isVisible={isVisible} animationIn="tada">
 		<View style={styles.modal}>
 			<Text h3 style={styles.title}>{title}</Text>

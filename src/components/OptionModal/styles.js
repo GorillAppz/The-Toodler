@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	title: {
 		textAlign: 'center',
-		color: 'white'
+		color: 'white',
+		fontWeight: 'bold'
 	},
 	modal: {
 		display: 'flex',

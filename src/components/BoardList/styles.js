@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	container: {
-		display: 'flex'
-	}
+	emptyMessage: {
+		color: 'grey',
+		textAlign: 'center'
+	},
 });

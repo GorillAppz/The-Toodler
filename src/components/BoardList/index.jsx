@@ -8,24 +8,19 @@ import BoardItem from '../BoardItem';
 
 const BoardList = ({ boards }) => (
 	<View>
-		{boards.length
-			? (
-				<View>
-					<FlatList
-						contentContainerStyle={styles.container}
-						data={boards}
-						renderItem={({ item }) => (
-							<BoardItem data={item} />
-						)}
-						keyExtractor={(board) => `${board.name}_${board.id}`}
-					/>
-				</View>
-			)
-			: (
-				<Text h3>
-					You have no boards, add some!
+		<FlatList
+			data={boards}
+			contentContainerStyle={{ flex: 1 }}
+			renderItem={({ item }) => (
+				<BoardItem data={item} />
+			)}
+			keyExtractor={(board) => `${board.name}_${board.id}`}
+			ListEmptyComponent={(
+				<Text h3 style={styles.emptyMessage}>
+					You have no boards... Create one!
 				</Text>
 			)}
+		/>
 	</View>
 );
 

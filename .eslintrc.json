@@ -64,6 +64,7 @@
                     "navigation"
                 ]
             }
-        ]
+		],
+		"no-underscore-dangle": "off"
     }
 }

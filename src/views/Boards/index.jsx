@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import BoardList from '../../components/BoardList';
-import BoardForm from '../../components/BoardForm';
+import BoardFormModal from '../../components/BoardFormModal';
 import { createBoard } from '../../actions/boardActions';
 
 import styles from './styles';
@@ -11,19 +11,28 @@ import styles from './styles';
 const Boards = ({ createBoard }) => {
 	const [showForm, setFormVisibility] = useState(false);
 
+	const submitHandler = (data) => { createBoard(data); setFormVisibility(false); };
+
 	return (
-		<View style={styles.main}>
-			<BoardList />
+		<View style={styles.container}>
+			<ScrollView style={styles.main}>
+				<BoardList />
+			</ScrollView>
 
-			<Button
-				title="Add new!"
-				onPress={() => setFormVisibility(true)}
-			/>
+			<View style={styles.bottom}>
+				<Button
+					onPressOut={() => setFormVisibility(true)}
+					buttonStyle={styles.addButton}
+					iconRight
+					icon={{ name: 'add-circle', color: 'white', size: 75 }}
+				/>
+			</View>
 
-			<BoardForm
+			<BoardFormModal
 				isVisible={showForm}
 				cancelHandler={() => setFormVisibility(false)}
-				submitHandler={(data) => createBoard(data)}
+				submitHandler={submitHandler}
+				title="Creating new Board"
 			/>
 		</View>
 	);
