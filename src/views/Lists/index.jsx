@@ -47,4 +47,8 @@ Lists.propTypes = {
 	createList: createListType.isRequired
 };
 
+Lists.navigationOptions = {
+	title: 'Lists'
+};
+
 export default connect(null, { createList })(Lists);

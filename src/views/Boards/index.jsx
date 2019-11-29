@@ -7,7 +7,7 @@ import BoardFormModal from '../../components/BoardFormModal';
 import { createBoard } from '../../actions/boardActions';
 
 import styles from './styles';
-import { createBoardType } from '../../types/index';
+import { createBoardType } from '../../types';
 
 const Boards = ({ createBoard }) => {
 	const [showForm, setFormVisibility] = useState(false);
@@ -43,6 +43,10 @@ const Boards = ({ createBoard }) => {
 
 Boards.propTypes = {
 	createBoard: createBoardType.isRequired
+};
+
+Boards.navigationOptions = {
+	title: 'Boards'
 };
 
 export default connect(null, { createBoard })(Boards);

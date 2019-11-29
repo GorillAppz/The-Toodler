@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, Animated } from 'react-native';
+import { FlatList, Text, Animated, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import TaskItem from '../TaskItem';
@@ -10,13 +10,14 @@ import { tasksType, updateTaskType, numberType } from '../../types';
 const TaskList = ({ tasks, updateTask, listId }) => {
 	const filteredTasks = tasks.filter((t) => t.listId === listId);
 	const [fadeAnim] = useState(new Animated.Value(0));
+	const [maxHeight, setMaxHeight] = useState(0);
 
 	useEffect(() => {
-		Animated.timing(
+		Animated.spring(
 			fadeAnim,
 			{
 				toValue: 1,
-				duration: 500
+				duration: 1000
 			}
 		).start();
 	}, []);
@@ -29,7 +30,9 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 
 
 	return (
-		<Animated.View style={{ opacity: fadeAnim }}>
+		<Animated.View
+			style={{ transform: [{ scaleY: fadeAnim }] }}
+		>
 			<Button
 				onPressOut={() => true}
 				buttonStyle={styles.addButton}

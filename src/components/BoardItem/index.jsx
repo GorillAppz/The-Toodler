@@ -47,7 +47,7 @@ const BoardItem = ({
 				underlayColor="rgba(0,0,0,0.1)"
 			>
 				<View style={styles.item}>
-					<Image source={{ uri: board.thumbnailPhoto }} style={styles.thumbnail} resizeMode="cover" />
+					<Image source={{ uri: board.thumbnailPhoto }} style={styles.thumbnail} />
 					<View style={styles.infoWrapper}>
 						<Text style={styles.name}>
 							{board.name}

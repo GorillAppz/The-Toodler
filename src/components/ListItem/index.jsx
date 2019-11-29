@@ -8,7 +8,7 @@ import styles from './styles';
 import { deleteList } from '../../actions/listActions';
 import OptionModal from '../OptionModal';
 import { deleteListType, listType, funcType, boolType } from '../../types';
-import TaskList from '../TaksList/index';
+import TaskList from '../TaskList/index';
 
 const ListItem = ({ list, deleteList, expandHandler, expanded }) => {
 	const [showOptions, toggleOptions] = useState(false);
@@ -26,11 +26,11 @@ const ListItem = ({ list, deleteList, expandHandler, expanded }) => {
 						<Text style={{ ...styles.name, color: getTextColor() }}>
 							{list.name}
 						</Text>
-						<Icon name="caret-down" type="font-awesome" color={getTextColor()} />
+						<Icon name={expanded ? 'caret-up' : 'caret-down'} type="font-awesome" color={getTextColor()} />
 					</View>
 				</View>
 			</TouchableHighlight>
-			{expanded ? <TaskList listId={list.id} /> : null }
+			{expanded ? <TaskList listId={list.id} /> : null}
 			<OptionModal
 				title={list.name}
 				isVisible={showOptions}
