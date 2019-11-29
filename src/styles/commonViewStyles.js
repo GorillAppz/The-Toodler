@@ -17,6 +17,9 @@ const viewStyle = {
 		height: 85,
 		width: '100%',
 		backgroundColor: '#65b879'
+	},
+	buttonTitleStyle: {
+		fontWeight: 'bold'
 	}
 };
 

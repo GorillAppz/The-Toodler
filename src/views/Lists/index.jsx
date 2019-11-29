@@ -26,7 +26,9 @@ const Lists = ({ navigation, createList }) => {
 					onPressOut={() => setFormVisibility(true)}
 					buttonStyle={styles.addButton}
 					iconRight
-					icon={{ name: 'add-circle', color: 'white', size: 65 }}
+					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
+					title="New List"
+					titleStyle={styles.buttonTitleStyle}
 				/>
 			</View>
 

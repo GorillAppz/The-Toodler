@@ -45,7 +45,9 @@ const ListList = ({ boardId, lists, boards }) => {
 					keyExtractor={(task) => task.name}
 					ListEmptyComponent={(
 						<Text h3 style={styles.emptyListText}>
-							You have no lists... Add one!
+							You have no lists...
+							{ '\n' }
+							Add one!
 						</Text>
 					)}
 				/>

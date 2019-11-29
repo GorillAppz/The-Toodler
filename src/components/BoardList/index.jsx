@@ -17,7 +17,9 @@ const BoardList = ({ boards }) => (
 			keyExtractor={(board) => `${board.name}_${board.id}`}
 			ListEmptyComponent={(
 				<Text h3 style={styles.emptyBoardText}>
-					You have no boards... Add one!
+					You have no boards...
+					{ '\n' }
+					Add one!
 				</Text>
 			)}
 		/>

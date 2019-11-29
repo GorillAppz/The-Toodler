@@ -34,7 +34,7 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 				onPressOut={() => true}
 				buttonStyle={styles.addButton}
 				iconRight
-				icon={{ name: 'add-circle', color: 'white', size: 15 }}
+				icon={{ name: 'add-circle-outline', color: 'white', size: 20 }}
 				title="New Task"
 				titleStyle={styles.addButtonTitle}
 			/>
@@ -46,8 +46,8 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 				)}
 				keyExtractor={(task) => task.name}
 				ListEmptyComponent={(
-					<Text h3>
-						You have no tasks, add some!
+					<Text h3 style={styles.emptyTaskText}>
+						You have no tasks... add one!
 					</Text>
 				)}
 			/>

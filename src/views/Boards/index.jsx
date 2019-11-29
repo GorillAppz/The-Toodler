@@ -25,7 +25,9 @@ const Boards = ({ createBoard }) => {
 					onPressOut={() => setFormVisibility(true)}
 					buttonStyle={styles.addButton}
 					iconRight
-					icon={{ name: 'add-circle', color: 'white', size: 65 }}
+					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
+					title="New Board"
+					titleStyle={styles.buttonTitleStyle}
 				/>
 			</View>
 

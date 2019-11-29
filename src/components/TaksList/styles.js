@@ -6,6 +6,13 @@ export default StyleSheet.create({
 		width: '100%'
 	},
 	addButtonTitle: {
-		fontSize: 12
+		fontSize: 12,
+		fontWeight: 'bold'
+	},
+	emptyTaskText: {
+		fontWeight: 'bold',
+		textAlign: 'center',
+		padding: 5,
+		color: 'gray'
 	}
 });

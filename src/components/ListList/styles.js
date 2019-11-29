@@ -31,6 +31,7 @@ export default StyleSheet.create({
 	},
 	emptyListText: {
 		alignSelf: 'center',
+		fontWeight: 'bold',
 		marginVertical: '50%',
 		color: 'gray',
 		textAlign: 'center'
