@@ -7,30 +7,53 @@ import SettingsModal from '../../components/SettingsModal';
 import { LIGHT } from '../../styles/colors';
 
 const Main = ({ navigation: { navigate } }) => {
-	const [showModal, setShowModal] = useState(false);
+	const [activeModal, setActiveModal] = useState('');
+
+	const modalToShow = () => {
+		if (activeModal === 'readMe') {
+			return (
+				<SettingsModal
+					isVisible
+					cancelHandler={() => setActiveModal('')}
+				/>
+			);
+		}
+		if (activeModal === 'settings') {
+			return (
+				<SettingsModal
+					isVisible
+					cancelHandler={() => setActiveModal('')}
+				/>
+			);
+		}
+		return null;
+	};
+
 	return (
 		<ImageBackground source={logo} style={styles.logo} resizeMode="cover">
 			<View>
 				<View style={styles.settingContainer}>
 					<Button
-						onPress={() => setShowModal(true)}
+						onPress={() => setActiveModal('settings')}
 						icon={<Icon name="settings" size={55} color={LIGHT} iconStyle={styles.icon} />}
 						buttonStyle={{ backgroundColor: 'transparent' }}
 					/>
 				</View>
-				<View style={styles.visitButtonContainer}>
+				<View style={styles.bottomButtonContainer}>
 					<Button
 						onPress={() => navigate('Boards')}
 						buttonStyle={styles.button}
 						title="Enter The Toodler!"
 						titleStyle={styles.buttonTitle}
 					/>
+					<Button
+						onPress={() => setActiveModal('readMe')}
+						buttonStyle={styles.readMeButton}
+						title="Read Me!"
+					/>
 				</View>
+				{modalToShow()}
 			</View>
-			<SettingsModal
-				isVisible={showModal}
-				cancelHandler={() => setShowModal(false)}
-			/>
 		</ImageBackground>
 	);
 };
