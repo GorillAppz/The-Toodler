@@ -1,7 +1,7 @@
 const viewStyle = {
 	container: {
 		flex: 1,
-		backgroundColor: 'white',
+		backgroundColor: '#000000',
 		height: '100%'
 	},
 	title: {
@@ -15,8 +15,7 @@ const viewStyle = {
 	},
 	addButton: {
 		height: 85,
-		width: '100%',
-		backgroundColor: '#65b879'
+		width: '100%'
 	},
 	buttonTitleStyle: {
 		fontWeight: 'bold'

@@ -5,17 +5,19 @@ import { connect } from 'react-redux';
 import BoardList from '../../components/BoardList';
 import BoardFormModal from '../../components/BoardFormModal';
 import { createBoard } from '../../actions/boardActions';
-
 import styles from './styles';
-import { createBoardType } from '../../types';
+import { createBoardType, boolType } from '../../types';
 
-const Boards = ({ createBoard }) => {
+const Boards = ({ createBoard, isDarkTheme }) => {
 	const [showForm, setFormVisibility] = useState(false);
 
 	const submitHandler = (data) => { createBoard(data); setFormVisibility(false); };
 
+	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
+	const getButtonColor = () => (isDarkTheme ? '#3f5745' : '#65b879');
+
 	return (
-		<View style={styles.container}>
+		<View style={{ ...styles.container, backgroundColor: getBackgroundColor() }}>
 			<ScrollView style={styles.main}>
 				<BoardList />
 			</ScrollView>
@@ -23,7 +25,7 @@ const Boards = ({ createBoard }) => {
 			<View style={styles.bottom}>
 				<Button
 					onPress={() => setFormVisibility(true)}
-					buttonStyle={styles.addButton}
+					buttonStyle={{ ...styles.addButton, backgroundColor: getButtonColor() }}
 					iconRight
 					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
 					title="New Board"
@@ -42,11 +44,16 @@ const Boards = ({ createBoard }) => {
 };
 
 Boards.propTypes = {
-	createBoard: createBoardType.isRequired
+	createBoard: createBoardType.isRequired,
+	isDarkTheme: boolType.isRequired
 };
 
 Boards.navigationOptions = {
 	title: 'Boards'
 };
 
-export default connect(null, { createBoard })(Boards);
+const mapStateToProps = (state) => ({
+	isDarkTheme: state.isDarkTheme
+});
+
+export default connect(mapStateToProps, { createBoard })(Boards);

@@ -6,17 +6,20 @@ import ListList from '../../components/ListList';
 import styles from './styles';
 import ListFormModal from '../../components/ListFormModal';
 import { createList } from '../../actions/listActions';
-import { createListType } from '../../types';
+import { createListType, boolType } from '../../types';
 
-const Lists = ({ navigation, createList }) => {
+const Lists = ({ navigation, createList, isDarkTheme }) => {
 	const { id } = navigation.state.params;
 
 	const [showForm, setFormVisibility] = useState(false);
 
 	const submitHandler = (data) => { createList(data); setFormVisibility(false); };
 
+	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
+	const getButtonColor = () => (isDarkTheme ? '#3f5745' : '#65b879');
+
 	return (
-		<View style={styles.container}>
+		<View style={{ ...styles.container, backgroundColor: getBackgroundColor() }}>
 			<ScrollView style={styles.main}>
 				<ListList boardId={id} />
 			</ScrollView>
@@ -24,7 +27,7 @@ const Lists = ({ navigation, createList }) => {
 			<View style={styles.bottom}>
 				<Button
 					onPressOut={() => setFormVisibility(true)}
-					buttonStyle={styles.addButton}
+					buttonStyle={{ ...styles.addButton, backgroundColor: getButtonColor() }}
 					iconRight
 					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
 					title="New List"
@@ -44,11 +47,16 @@ const Lists = ({ navigation, createList }) => {
 };
 
 Lists.propTypes = {
-	createList: createListType.isRequired
+	createList: createListType.isRequired,
+	isDarkTheme: boolType.isRequired
 };
 
 Lists.navigationOptions = {
 	title: 'Lists'
 };
 
-export default connect(null, { createList })(Lists);
+const mapStateToProps = (state) => ({
+	isDarkTheme: state.isDarkTheme
+});
+
+export default connect(mapStateToProps, { createList })(Lists);

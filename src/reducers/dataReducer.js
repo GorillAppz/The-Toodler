@@ -1,7 +1,7 @@
 import * as constants from '../constants';
 import data from '../resources/data.json';
 
-const initState = { ...data };
+const initState = { ...data, isDarkTheme: false };
 
 export default (state = initState, action) => {
 	const newState = { ...state };
@@ -68,6 +68,10 @@ export default (state = initState, action) => {
 			newState.tasks = newState.tasks
 				.map((task) => (task.id === payload.taskId ? { ...task, listId: payload.listId } : task));
 			return state.map((task) => (task.id === payload.taskId ? { ...task, listId: payload.listId } : task));
+		}
+		case constants.TOGGLE_DARK_THEME: {
+			newState.isDarkTheme = !newState.isDarkTheme;
+			return newState;
 		}
 		default: {
 			return state;
