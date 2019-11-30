@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { LIGHT, DARK, BLUE, PURPLE } from '../../styles/colors';
+import { LIGHT, PURPLE } from '../../styles/colors';
 import { basicShadowDrop } from '../../styles';
 
 export default StyleSheet.create({

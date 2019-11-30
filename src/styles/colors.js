@@ -8,6 +8,6 @@ export const RED = '#C02F1D';
 export const AMBER = '#F26D21';
 export const BLUE = '#1496BB';
 
-export const PURPLE = "#73327d";
+export const PURPLE = '#73327d';
 export const SALMON = '#e87981';
 export const DARK_SALMON = '#b46167';

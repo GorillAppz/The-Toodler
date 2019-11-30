@@ -7,7 +7,6 @@ import OptionModal from '../OptionModal';
 import TaskFormModal from '../TaskFormModal';
 import MoveTaskModal from '../MoveTaskModal';
 
-import styles from './styles';
 import { GREEN } from '../../styles/colors';
 
 import { deleteTask, updateTask } from '../../actions/taskActions';
@@ -63,8 +62,8 @@ const TaskItem = ({ task, deleteTask, updateTask, updateIsFinished }) => {
 
 	return (
 		<View>
-			<View style={styles.item}>
-				<View style={styles.nameWrapper}>
+			<View>
+				<View>
 					<CheckBox
 						title={`${task.name} \n- ${task.description}`}
 						checked={task.isFinished}

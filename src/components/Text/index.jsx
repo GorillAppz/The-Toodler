@@ -1,9 +1,7 @@
 import React from 'react';
-import { ViewPropTypes } from 'react-native';
 import { Text } from 'react-native-elements';
-
 import styles from './styles';
-import { nodeType } from '../../types';
+import { nodeType, oneOfTypeType, objectType, arrayType } from '../../types';
 
 const CustomText = ({ children, style, ...props }) => (
 	<Text {...props} style={{ ...style, ...styles.text }}>
@@ -13,7 +11,7 @@ const CustomText = ({ children, style, ...props }) => (
 
 CustomText.propTypes = {
 	children: nodeType,
-	style: ViewPropTypes.style
+	style: oneOfTypeType([objectType, arrayType])
 };
 
 export default CustomText;

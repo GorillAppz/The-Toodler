@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { INPUT_MODAL_TITLE } from '../../styles/fonts';
+
 export default StyleSheet.create({
 	infoContainer: {
 		marginVertical: 10

@@ -31,5 +31,5 @@ export const basicShadowDrop = {
 		height: 5,
 		width: 0
 	},
-	elevation: 5,
-}
+	elevation: 5
+};

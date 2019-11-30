@@ -9,7 +9,7 @@ export default StyleSheet.create({
 	},
 	nameWrapper: {
 		alignItems: 'center',
-		paddingTop: 5,
+		paddingTop: 5
 	},
 	name: {
 		fontWeight: 'bold',

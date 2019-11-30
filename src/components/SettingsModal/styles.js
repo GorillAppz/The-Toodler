@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { LIGHT, DARK } from '../../styles/colors';
-import { INPUT_MODAL_TITLE } from '../../styles/fonts';
+import { DARK } from '../../styles/colors';
 
 export default StyleSheet.create({
 	darkThemeText: {

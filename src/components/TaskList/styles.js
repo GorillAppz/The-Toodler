@@ -15,6 +15,6 @@ export default StyleSheet.create({
 	emptyTaskText: {
 		fontWeight: 'bold',
 		textAlign: 'center',
-		padding: 5,
+		padding: 5
 	}
 });

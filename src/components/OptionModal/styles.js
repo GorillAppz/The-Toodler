@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { GREEN, AMBER, RED, LIGHT, DARK } from '../../styles/colors';
+import { GREEN, AMBER, RED, LIGHT } from '../../styles/colors';
 
 export default StyleSheet.create({
 	title: {

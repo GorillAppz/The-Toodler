@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { LIGHT, GRAY } from '../../styles/colors';
+import { LIGHT } from '../../styles/colors';
 import { INPUT_MODAL_TITLE } from '../../styles/fonts';
 
 export default StyleSheet.create({
@@ -11,6 +11,6 @@ export default StyleSheet.create({
 		flexDirection: 'column'
 	},
 	modalHeader: {
-		...INPUT_MODAL_TITLE,
+		...INPUT_MODAL_TITLE
 	}
 });
