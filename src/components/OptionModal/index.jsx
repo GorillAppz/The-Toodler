@@ -8,7 +8,14 @@ import styles from './styles';
 import { stringType, boolType, funcType } from '../../types';
 
 const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler, moveHandler }) => (
-	<StyledModal title={title} style={styles.modal} isVisible={isVisible} animationIn="tada">
+	<StyledModal
+		title={title}
+		style={styles.modal}
+		isVisible={isVisible}
+		animationIn="tada"
+		onBackdropPress={() => cancelHandler()}
+		onBackButtonPress={() => cancelHandler()}
+	>
 		<Button
 			title="Delete"
 			titleStyle={styles.buttonText}

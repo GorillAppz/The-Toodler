@@ -73,7 +73,13 @@ class BoardFormModal extends React.Component {
 
 		return (
 			<View>
-				<StyledModal title={title} isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
+				<StyledModal
+					title={title}
+					isVisible={isVisible}
+					onModalShow={() => this.setStateOnModalShow()}
+					onBackdropPress={() => cancelHandler()}
+					onBackButtonPress={() => cancelHandler()}
+				>
 					<Input
 						label="Name"
 						placeholder="Enter board name"

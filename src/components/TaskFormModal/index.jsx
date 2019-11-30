@@ -71,7 +71,13 @@ class TaskFormModal extends React.Component {
 		const { isVisible, cancelHandler, title } = this.props;
 
 		return (
-			<StyledModal title={title} isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
+			<StyledModal
+				title={title}
+				isVisible={isVisible}
+				onModalShow={() => this.setStateOnModalShow()}
+				onBackdropPress={() => cancelHandler()}
+				onBackButtonPress={() => cancelHandler()}
+			>
 				<Input
 					label="Name"
 					placeholder="Enter task name"

@@ -11,7 +11,12 @@ import { toggleDarkTheme } from '../../actions/themeActions';
 import { boolType, funcType } from '../../types';
 
 const SettingsModal = ({ isVisible, cancelHandler, toggleDarkTheme, isDarkTheme }) => (
-	<StyledModal isVisible={isVisible} title="Settings">
+	<StyledModal
+		isVisible={isVisible}
+		title="Settings"
+		onBackdropPress={() => cancelHandler()}
+		onBackButtonPress={() => cancelHandler()}
+	>
 		<View style={styles.darkThemeContainer}>
 			<Text style={styles.darkThemeText}> Toggle Dark Theme! </Text>
 			<Switch
