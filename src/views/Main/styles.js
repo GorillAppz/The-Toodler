@@ -29,11 +29,18 @@ export default StyleSheet.create({
 		alignItems: 'flex-end',
 		justifyContent: 'flex-start',
 		paddingTop: '10%',
-		height: '87.5%'
+		height: '81.5%'
 	},
-	visitButtonContainer: {
+	bottomButtonContainer: {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center'
+	},
+	readMeButton: {
+		margin: 10,
+		borderRadius: 30,
+		backgroundColor: '#b5b861',
+		borderColor: LIGHT,
+		borderWidth: 2
 	}
 });
