@@ -90,6 +90,7 @@ class BoardFormModal extends React.Component {
 							errorMessage={errors.description}
 							maxLength={100}
 							multiline
+							blurOnSubmit
 							onChangeText={(text) => this.inputHandler('description', text)}
 							containerStyle={styles.inputContainer}
 						/>

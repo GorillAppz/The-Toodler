@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import ListItem from '../ListItem';
 import styles from './styles';
-import ListFormModal from '../ListFormModal';
 import { listsType, numberType, boardsType } from '../../types';
 
 const ListList = ({ boardId, lists, boards }) => {
@@ -42,17 +41,16 @@ const ListList = ({ boardId, lists, boards }) => {
 							expanded={(taskListToExpand === item.id)}
 						/>
 					)}
-					keyExtractor={(task) => task.name}
+					keyExtractor={(list) => `${list.name}_${list.id}`}
 					ListEmptyComponent={(
 						<Text h3 style={styles.emptyListText}>
 							You have no lists...
-							{ '\n' }
+							{'\n'}
 							Add one!
 						</Text>
 					)}
 				/>
 			</ScrollView>
-			<ListFormModal />
 		</View>
 	);
 };

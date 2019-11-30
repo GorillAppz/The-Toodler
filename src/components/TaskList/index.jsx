@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, Animated, View } from 'react-native';
+import { FlatList, Text, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import TaskItem from '../TaskItem';
-import { updateTask } from '../../actions/taskActions';
+import { createTask, updateTask } from '../../actions/taskActions';
 import styles from './styles';
-import { tasksType, updateTaskType, numberType } from '../../types';
+import { tasksType, updateTaskType, numberType, createTaskType } from '../../types';
+import TaskFormModal from '../TaskFormModal';
 
-const TaskList = ({ tasks, updateTask, listId }) => {
+const TaskList = ({ tasks, createTask, updateTask, listId }) => {
 	const filteredTasks = tasks.filter((t) => t.listId === listId);
-	const [fadeAnim] = useState(new Animated.Value(0));
-	const [maxHeight, setMaxHeight] = useState(0);
+	const [expandAnim] = useState(new Animated.Value(0));
+	const [displayCreateModal, setDisplayCreateModal] = useState(false);
 
 	useEffect(() => {
 		Animated.spring(
-			fadeAnim,
+			expandAnim,
 			{
 				toValue: 1,
-				duration: 1000
+				speed: 50
 			}
 		).start();
 	}, []);
@@ -31,10 +32,10 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 
 	return (
 		<Animated.View
-			style={{ transform: [{ scaleY: fadeAnim }] }}
+			style={{ transform: [{ scaleY: expandAnim }] }}
 		>
 			<Button
-				onPressOut={() => true}
+				onPressOut={() => setDisplayCreateModal(true)}
 				buttonStyle={styles.addButton}
 				iconRight
 				icon={{ name: 'add-circle-outline', color: 'white', size: 20 }}
@@ -47,12 +48,19 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 				renderItem={({ item }) => (
 					<TaskItem task={item} updateIsFinished={(id) => updateIsFinishedHandler(id)} />
 				)}
-				keyExtractor={(task) => task.name}
+				keyExtractor={(task) => `${task.name}_${task.id}`}
 				ListEmptyComponent={(
 					<Text h3 style={styles.emptyTaskText}>
 						You have no tasks... add one!
 					</Text>
 				)}
+			/>
+			<TaskFormModal
+				isVisible={displayCreateModal}
+				cancelHandler={() => setDisplayCreateModal(false)}
+				submitHandler={(newTask) => { createTask(newTask); setDisplayCreateModal(false); }}
+				title="Creating New Task"
+				listId={listId}
 			/>
 		</Animated.View>
 	);
@@ -60,6 +68,7 @@ const TaskList = ({ tasks, updateTask, listId }) => {
 
 TaskList.propTypes = {
 	tasks: tasksType.isRequired,
+	createTask: createTaskType.isRequired,
 	updateTask: updateTaskType.isRequired,
 	listId: numberType.isRequired
 };
@@ -68,4 +77,4 @@ const mapStateToProps = (state) => ({
 	tasks: state.tasks
 });
 
-export default connect(mapStateToProps, { updateTask })(TaskList);
+export default connect(mapStateToProps, { updateTask, createTask })(TaskList);

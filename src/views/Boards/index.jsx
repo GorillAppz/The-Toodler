@@ -22,7 +22,7 @@ const Boards = ({ createBoard }) => {
 
 			<View style={styles.bottom}>
 				<Button
-					onPressOut={() => setFormVisibility(true)}
+					onPress={() => setFormVisibility(true)}
 					buttonStyle={styles.addButton}
 					iconRight
 					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}

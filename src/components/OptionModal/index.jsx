@@ -1,31 +1,84 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { View } from 'react-native';
 import styles from './styles';
+import { stringType, boolType, funcType } from '../../types';
 
-const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler, editModal }) => (
+const OptionModal = ({ title, isVisible, deleteHandler, editHandler, cancelHandler, moveHandler }) => (
 	<Modal isVisible={isVisible} animationIn="tada">
 		<View style={styles.modal}>
 			<Text h3 style={styles.title}>{title}</Text>
 			<Button
-				title="DELETE"
-				icon={{ name: 'delete', size: 16, color: 'white' }}
+				title="Delete"
+				titleStyle={styles.buttonText}
+				icon={(
+					<Icon
+						name="trash-alt"
+						size={30}
+						color="white"
+					/>
+				)}
 				buttonStyle={{ ...styles.button, ...styles.delete }}
 				onPress={() => deleteHandler()}
 			/>
 			<Button
-				title="EDIT"
+				title="Edit"
+				titleStyle={styles.buttonText}
 				buttonStyle={{ ...styles.button, ...styles.edit }}
+				icon={(
+					<Icon
+						name="edit"
+						size={30}
+						color="white"
+					/>
+				)}
 				onPress={() => editHandler()}
 			/>
+			{
+				moveHandler
+					? (
+						<Button
+							title="Move to other list"
+							titleStyle={styles.buttonText}
+							buttonStyle={{ ...styles.button, ...styles.move }}
+							onPress={() => moveHandler()}
+							icon={(
+								<Icon
+									name="people-carry"
+									size={30}
+									color="white"
+								/>
+							)}
+						/>
+					)
+					: null
+			}
 			<Button
-				title="cancel"
+				title="Cancel"
+				titleStyle={styles.buttonText}
 				buttonStyle={styles.button}
+				icon={(
+					<Icon
+						name="ban"
+						size={30}
+						color="white"
+					/>
+				)}
 				onPress={() => cancelHandler()}
 			/>
 		</View>
 	</Modal>
 );
+
+OptionModal.propTypes = {
+	title: stringType.isRequired,
+	isVisible: boolType.isRequired,
+	deleteHandler: funcType.isRequired,
+	cancelHandler: funcType.isRequired,
+	editHandler: funcType.isRequired,
+	moveHandler: funcType
+};
 
 export default OptionModal;

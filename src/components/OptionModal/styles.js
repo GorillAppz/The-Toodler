@@ -9,15 +9,22 @@ export default StyleSheet.create({
 	modal: {
 		display: 'flex',
 		justifyContent: 'space-around',
-		height: 400
+		height: 500
 	},
 	button: {
 		padding: 25
+	},
+	buttonText: {
+		fontWeight: 'bold',
+		marginLeft: 10
 	},
 	delete: {
 		backgroundColor: 'red'
 	},
 	edit: {
 		backgroundColor: 'green'
+	},
+	move: {
+		backgroundColor: '#ffb347'
 	}
 });

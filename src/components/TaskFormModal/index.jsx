@@ -4,6 +4,7 @@ import { Input, Button, Text } from 'react-native-elements';
 import { View } from 'react-native';
 
 import styles from './styles';
+import { taskType, numberType, funcType, boolType, stringType } from '../../types';
 
 const initState = {
 	fields: {
@@ -22,13 +23,13 @@ const initState = {
 class TaskFormModal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { ...initState, listId: props.listId };
+		this.state = { ...initState };
 	}
 
 	setStateOnModalShow() {
 		const { prevTask, listId } = this.props;
 		if (prevTask) {
-			this.setState({ fields: { ...prevTask, listId } });
+			this.setState({ fields: { ...prevTask } });
 		} else {
 			this.setState({ fields: { ...initState.fields, listId }, errors: { ...initState.errors } });
 		}
@@ -86,11 +87,11 @@ class TaskFormModal extends React.Component {
 						<Input
 							label="Description"
 							placeholder="Enter description"
-							value={fields.name}
+							value={fields.description}
 							errorStyle={{ color: 'red' }}
-							errorMessage={errors.name}
+							errorMessage={errors.description}
 							maxLength={40}
-							onChangeText={(text) => this.inputHandler('name', text)}
+							onChangeText={(text) => this.inputHandler('description', text)}
 							containerStyle={styles.inputContainer}
 						/>
 
@@ -109,5 +110,14 @@ class TaskFormModal extends React.Component {
 		);
 	}
 }
+
+TaskFormModal.propTypes = {
+	title: stringType.isRequired,
+	isVisible: boolType.isRequired,
+	prevTask: taskType,
+	listId: numberType,
+	submitHandler: funcType.isRequired,
+	cancelHandler: funcType.isRequired
+};
 
 export default TaskFormModal;

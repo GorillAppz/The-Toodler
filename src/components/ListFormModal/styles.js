@@ -24,6 +24,9 @@ export default StyleSheet.create({
 		color: 'grey',
 		textAlign: 'center'
 	},
+	colorPickerContainer: {
+		marginVertical: 10
+	},
 	colorPickerTitle: {
 		textAlign: 'center',
 		color: 'gray',

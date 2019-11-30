@@ -11,7 +11,7 @@ const MainNavigator = createStackNavigator(
 		Lists: { screen: Lists }
 	},
 	{
-		initialRouteName: 'Main',
+		initialRouteName: 'Boards',
 		/* The header config from HomeScreen is now here */
 		defaultNavigationOptions: {
 			headerStyle: {

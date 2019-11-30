@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	container: {
 		display: 'flex',
-		borderBottomWidth: 1.5,
+		borderBottomWidth: 1,
 		borderBottomColor: 'lightgray'
 	},
 	nameWrapper: {

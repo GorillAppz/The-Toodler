@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { ColorPicker, fromHsv } from 'react-native-color-picker';
 
 import styles from './styles';
+import { listType, numberType, funcType, boolType, stringType } from '../../types';
 
 const initState = {
 	fields: {
@@ -15,23 +16,22 @@ const initState = {
 	},
 	errors: {
 		name: '',
-		description: '',
-		color: ''
+		description: ''
 	}
 };
 
 class ListFormModal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { ...initState, boardId: props.boardId };
+		this.state = { ...initState };
 	}
 
 	setStateOnModalShow() {
-		const { prevData, boardId } = this.props;
-		if (prevData) {
-			this.setState({ fields: { ...prevData, boardId } });
+		const { prevList, boardId } = this.props;
+		if (prevList) {
+			this.setState({ fields: { ...prevList } });
 		} else {
-			this.setState({ fields: { ...initState.fields, boardId }, errors: { ...initState.errors } });
+			this.setState({ fields: { ...initState.fields, boardId: boardId || '' }, errors: { ...initState.errors } });
 		}
 	}
 
@@ -83,7 +83,7 @@ class ListFormModal extends React.Component {
 							onChangeText={(text) => this.inputHandler('name', text)}
 							containerStyle={styles.inputContainer}
 						/>
-						<View>
+						<View style={styles.colorPickerContainer}>
 							<Text h5 style={styles.colorPickerTitle}>
 								Choose your List Color
 							</Text>
@@ -91,7 +91,6 @@ class ListFormModal extends React.Component {
 								color={fields.color}
 								onColorChange={(value) => this.colorChangeHandler(value)}
 								style={styles.colorPicker}
-								hideSliders
 							/>
 						</View>
 
@@ -110,5 +109,14 @@ class ListFormModal extends React.Component {
 		);
 	}
 }
+
+ListFormModal.propTypes = {
+	title: stringType,
+	prevList: listType,
+	boardId: numberType,
+	submitHandler: funcType.isRequired,
+	cancelHandler: funcType.isRequired,
+	isVisible: boolType.isRequired
+};
 
 export default ListFormModal;

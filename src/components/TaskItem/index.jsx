@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { deleteTask, updateTask } from '../../actions/taskActions';
 import OptionModal from '../OptionModal';
-import { taskType, deleteTaskType, updateIsFinishedType } from '../../types';
+import { taskType, deleteTaskType, updateIsFinishedType, updateTaskType } from '../../types';
 import TaskFormModal from '../TaskFormModal';
+import MoveTaskModal from '../MoveTaskModal';
 
-const TaskItem = ({ task, deleteTask, updateIsFinished }) => {
+const TaskItem = ({ task, deleteTask, updateTask, updateIsFinished }) => {
 	const [activeModal, setActiveModal] = useState('');
+
+	const updateTaskListId = (newListId) => {
+		const newTask = {
+			...task,
+			listId: newListId
+		};
+		updateTask(newTask);
+	};
 
 	const modalToShow = () => {
 		if (activeModal === 'option') {
@@ -19,6 +28,7 @@ const TaskItem = ({ task, deleteTask, updateIsFinished }) => {
 					isVisible
 					deleteHandler={() => { deleteTask(task.id); setActiveModal(''); }}
 					editHandler={() => { setActiveModal('edit'); }}
+					moveHandler={() => { setActiveModal('move'); }}
 					cancelHandler={() => setActiveModal('')}
 				/>
 			);
@@ -34,28 +44,32 @@ const TaskItem = ({ task, deleteTask, updateIsFinished }) => {
 				/>
 			);
 		}
+		if (activeModal === 'move') {
+			return (
+				<MoveTaskModal
+					isVisible
+					currentListId={task.listId}
+					cancelHandler={() => setActiveModal('')}
+					submitHandler={(newListId) => { updateTaskListId(newListId); setActiveModal(''); }}
+					title="Moving Task"
+				/>
+			);
+		}
 		return null;
 	};
 
 	return (
 		<View>
-			<TouchableHighlight
-				onLongPress={() => setActiveModal('option')}
-			>
-				<View style={styles.item}>
-					<View style={styles.nameWrapper}>
-						<Text style={styles.name}>
-							{task.name}
-						</Text>
-						<CheckBox
-							title={task.name}
-							checked={task.isFinished}
-							onLongPress={() => setActiveModal('edit')}
-							onPress={() => updateIsFinished(task.id)}
-						/>
-					</View>
+			<View style={styles.item}>
+				<View style={styles.nameWrapper}>
+					<CheckBox
+						title={task.name}
+						checked={task.isFinished}
+						onPress={() => updateIsFinished(task.id)}
+						onLongPress={() => setActiveModal('option')}
+					/>
 				</View>
-			</TouchableHighlight>
+			</View>
 			{modalToShow()}
 		</View>
 	);
@@ -65,7 +79,8 @@ const TaskItem = ({ task, deleteTask, updateIsFinished }) => {
 TaskItem.propTypes = {
 	task: taskType.isRequired,
 	deleteTask: deleteTaskType.isRequired,
+	updateTask: updateTaskType.isRequired,
 	updateIsFinished: updateIsFinishedType.isRequired
 };
 
-export default connect(null, { deleteTask })(TaskItem);
+export default connect(null, { deleteTask, updateTask })(TaskItem);
