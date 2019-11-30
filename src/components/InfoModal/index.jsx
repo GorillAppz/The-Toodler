@@ -61,6 +61,7 @@ const infoModal = ({ isVisible, cancelHandler }) => (
 			<Button
 				title="Close"
 				style={styles.closeButton}
+				onPress={() => cancelHandler()}
 			/>
 		</ScrollView>
 	</StyledModal>
