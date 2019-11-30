@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { View } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 
 import Text from '../Text';
 
-import styles from './styles.js'
+import styles from './styles';
 
-import { stringType, nodeType } from '../../types/index.js';
+import { stringType, nodeType } from '../../types';
 
 const StyledModal = ({ title, children, style, ...other }) => (
 	<Modal {...other}>
@@ -21,7 +21,8 @@ const StyledModal = ({ title, children, style, ...other }) => (
 
 StyledModal.propTypes = {
 	title: stringType,
-	children: nodeType
-}
+	children: nodeType,
+	style: ViewPropTypes.style
+};
 
 export default StyledModal;

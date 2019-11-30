@@ -74,8 +74,6 @@
 				"ImportDeclaration": "never"
 			}
 		],
-		"react/jsx-props-no-spreading": [{
-			"custom": 0
-		}]
+		"react/jsx-props-no-spreading": 0
     }
 }

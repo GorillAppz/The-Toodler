@@ -1,9 +1,9 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { Platform } from 'react-native';
 import Boards from '../views/Boards';
 import Lists from '../views/Lists';
 import Main from '../views/Main';
-import { Platform } from 'react-native';
 
 import { LIGHT, PURPLE } from '../styles/colors';
 

@@ -4,6 +4,8 @@ import { Button } from 'react-native-elements';
 
 import styles from './styles';
 
+import { funcType } from '../../types';
+
 const ModalActionButtons = ({ cancelHandler, submitHandler }) => (
 	<View style={styles.buttonsContainer}>
 		<Button
@@ -21,5 +23,9 @@ const ModalActionButtons = ({ cancelHandler, submitHandler }) => (
 	</View>
 );
 
+ModalActionButtons.propTypes = {
+	cancelHandler: funcType.isRequired,
+	submitHandler: funcType.isRequired
+};
 
 export default ModalActionButtons;

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button, Text } from 'react-native-elements';
-import { View } from 'react-native';
+import { Button } from 'react-native-elements';
 
-import StyledModal from '../StyledModal';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import StyledModal from '../StyledModal';
 
 import styles from './styles';
 import { stringType, boolType, funcType } from '../../types';

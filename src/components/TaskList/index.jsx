@@ -12,14 +12,14 @@ import styles from './styles';
 import { DARK, LIGHT } from '../../styles/colors';
 
 import { createTask, updateTask } from '../../actions/taskActions';
-import { tasksType, updateTaskType, numberType, createTaskType } from '../../types';
+import { tasksType, updateTaskType, numberType, createTaskType, stringType } from '../../types';
 
 const TaskList = ({ tasks, createTask, updateTask, listId, listColor }) => {
 	const filteredTasks = tasks.filter((t) => t.listId === listId);
 	const [expandAnim] = useState(new Animated.Value(0));
 	const [displayCreateModal, setDisplayCreateModal] = useState(false);
 
-	const getTextColor = () => (tinyColor(listColor).isDark() ? LIGHT : DARK)
+	const getTextColor = () => (tinyColor(listColor).isDark() ? LIGHT : DARK);
 
 	useEffect(() => {
 		Animated.spring(
@@ -78,7 +78,8 @@ TaskList.propTypes = {
 	tasks: tasksType.isRequired,
 	createTask: createTaskType.isRequired,
 	updateTask: updateTaskType.isRequired,
-	listId: numberType.isRequired
+	listId: numberType.isRequired,
+	listColor: stringType.isRequired
 };
 
 const mapStateToProps = ({ data }) => ({

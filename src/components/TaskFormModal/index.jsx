@@ -1,7 +1,7 @@
 import React from 'react';
-import StyledModal from '../StyledModal';
 import { Input } from 'react-native-elements';
 
+import StyledModal from '../StyledModal';
 import ModalActionButtons from '../ModalActionButtons';
 
 import styles from './styles';

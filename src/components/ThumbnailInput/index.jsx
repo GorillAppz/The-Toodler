@@ -24,13 +24,14 @@ const ThumbnailInput = ({ currImage, errorMsg, inputHandler }) => {
 			<Text style={styles.errorMsg}>{errorMsg}</Text>
 			{
 				currImage.length
-					?
-					<Image
-						style={styles.image}
-						source={currImage.length
-							? { uri: currImage }
-							: null}
-					/>
+					? (
+						<Image
+							style={styles.image}
+							source={currImage.length
+								? { uri: currImage }
+								: null}
+						/>
+					)
 					: null
 			}
 			<View style={styles.buttonsContainer}>

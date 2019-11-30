@@ -8,6 +8,7 @@ import StyledModal from '../StyledModal';
 
 import styles from './styles';
 import { toggleDarkTheme } from '../../actions/themeActions';
+import { boolType, funcType } from '../../types';
 
 const SettingsModal = ({ isVisible, cancelHandler, toggleDarkTheme, isDarkTheme }) => (
 	<StyledModal isVisible={isVisible} title="Settings">
@@ -32,5 +33,12 @@ const SettingsModal = ({ isVisible, cancelHandler, toggleDarkTheme, isDarkTheme 
 const mapSateToProps = ({ theme }) => ({
 	isDarkTheme: theme.isDarkTheme
 });
+
+SettingsModal.propTypes = {
+	isVisible: boolType,
+	cancelHandler: funcType,
+	toggleDarkTheme: funcType,
+	isDarkTheme: boolType
+};
 
 export default connect(mapSateToProps, { toggleDarkTheme })(SettingsModal);

@@ -87,7 +87,7 @@ class ListFormModal extends React.Component {
 				<View style={styles.colorPickerContainer}>
 					<Text h5 style={styles.colorPickerTitle}>
 						Choose your List Color
-							</Text>
+					</Text>
 					<ColorPicker
 						color={fields.color}
 						onColorChange={(value) => this.colorChangeHandler(value)}
