@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, Animated } from 'react-native';
+import { FlatList, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
+import tinyColor from 'tinycolor2';
+
+import Text from '../Text';
 import TaskItem from '../TaskItem';
-import { createTask, updateTask } from '../../actions/taskActions';
-import styles from './styles';
-import { tasksType, updateTaskType, numberType, createTaskType } from '../../types';
 import TaskFormModal from '../TaskFormModal';
 
-const TaskList = ({ tasks, createTask, updateTask, listId }) => {
+import styles from './styles';
+import { DARK, LIGHT } from '../../styles/colors';
+
+import { createTask, updateTask } from '../../actions/taskActions';
+import { tasksType, updateTaskType, numberType, createTaskType } from '../../types';
+
+const TaskList = ({ tasks, createTask, updateTask, listId, listColor }) => {
 	const filteredTasks = tasks.filter((t) => t.listId === listId);
 	const [expandAnim] = useState(new Animated.Value(0));
 	const [displayCreateModal, setDisplayCreateModal] = useState(false);
+
+	const getTextColor = () => (tinyColor(listColor).isDark() ? LIGHT : DARK)
 
 	useEffect(() => {
 		Animated.spring(
@@ -35,7 +43,7 @@ const TaskList = ({ tasks, createTask, updateTask, listId }) => {
 			style={{ transform: [{ scaleY: expandAnim }] }}
 		>
 			<Button
-				onPressOut={() => setDisplayCreateModal(true)}
+				onPress={() => setDisplayCreateModal(true)}
 				buttonStyle={styles.addButton}
 				iconRight
 				icon={{ name: 'add-circle-outline', color: 'white', size: 20 }}
@@ -50,8 +58,8 @@ const TaskList = ({ tasks, createTask, updateTask, listId }) => {
 				)}
 				keyExtractor={(task) => `${task.name}_${task.id}`}
 				ListEmptyComponent={(
-					<Text h3 style={styles.emptyTaskText}>
-						You have no tasks... add one!
+					<Text h5 style={{ ...styles.emptyTaskText, color: getTextColor() }}>
+						This list has no tasks... add one!
 					</Text>
 				)}
 			/>
@@ -59,7 +67,7 @@ const TaskList = ({ tasks, createTask, updateTask, listId }) => {
 				isVisible={displayCreateModal}
 				cancelHandler={() => setDisplayCreateModal(false)}
 				submitHandler={(newTask) => { createTask(newTask); setDisplayCreateModal(false); }}
-				title="Creating New Task"
+				title="Creating new Task"
 				listId={listId}
 			/>
 		</Animated.View>
@@ -73,8 +81,8 @@ TaskList.propTypes = {
 	listId: numberType.isRequired
 };
 
-const mapStateToProps = (state) => ({
-	tasks: state.tasks
+const mapStateToProps = ({ data }) => ({
+	tasks: data.tasks
 });
 
 export default connect(mapStateToProps, { updateTask, createTask })(TaskList);

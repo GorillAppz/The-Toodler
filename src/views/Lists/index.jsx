@@ -7,6 +7,7 @@ import styles from './styles';
 import ListFormModal from '../../components/ListFormModal';
 import { createList } from '../../actions/listActions';
 import { createListType, boolType } from '../../types';
+import { getBackgroundColor, getLargeAddButtonColor } from '../../helpers/themeColors';
 
 const Lists = ({ navigation, createList, isDarkTheme }) => {
 	const { id } = navigation.state.params;
@@ -15,19 +16,16 @@ const Lists = ({ navigation, createList, isDarkTheme }) => {
 
 	const submitHandler = (data) => { createList(data); setFormVisibility(false); };
 
-	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
-	const getButtonColor = () => (isDarkTheme ? '#3f5745' : '#65b879');
-
 	return (
-		<View style={{ ...styles.container, backgroundColor: getBackgroundColor() }}>
+		<View style={{ ...styles.container, backgroundColor: getBackgroundColor(isDarkTheme) }}>
 			<ScrollView style={styles.main}>
 				<ListList boardId={id} />
 			</ScrollView>
 
 			<View style={styles.bottom}>
 				<Button
-					onPressOut={() => setFormVisibility(true)}
-					buttonStyle={{ ...styles.addButton, backgroundColor: getButtonColor() }}
+					onPress={() => setFormVisibility(true)}
+					buttonStyle={{ ...styles.addButton, backgroundColor: getLargeAddButtonColor(isDarkTheme) }}
 					iconRight
 					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
 					title="New List"
@@ -39,7 +37,7 @@ const Lists = ({ navigation, createList, isDarkTheme }) => {
 				isVisible={showForm}
 				cancelHandler={() => setFormVisibility(false)}
 				submitHandler={submitHandler}
-				title="Creating new list"
+				title="Creating new List"
 				boardId={id}
 			/>
 		</View>
@@ -52,11 +50,11 @@ Lists.propTypes = {
 };
 
 Lists.navigationOptions = {
-	title: 'Lists'
+	title: 'Lists & Tasks'
 };
 
-const mapStateToProps = (state) => ({
-	isDarkTheme: state.isDarkTheme
+const mapStateToProps = ({ theme }) => ({
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapStateToProps, { createList })(Lists);

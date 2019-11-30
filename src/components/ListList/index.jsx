@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { View, ScrollView, FlatList, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { View, ScrollView, FlatList, Image } from 'react-native';
+
+import Text from '../Text';
 import ListItem from '../ListItem';
+
 import styles from './styles';
+
+import { getBackgroundColor, getTextColor } from '../../helpers/themeColors';
 import { listsType, numberType, boardsType, boolType } from '../../types';
 
 const ListList = ({ boardId, lists, boards, isDarkTheme }) => {
 	const [taskListToExpand, setTaskListToExpand] = useState(null);
-
-	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
-	const getTextColor = () => (isDarkTheme ? 'white' : 'black');
-
 
 	const expandListHandler = (listId) => {
 		if (listId === taskListToExpand) {
@@ -24,14 +24,14 @@ const ListList = ({ boardId, lists, boards, isDarkTheme }) => {
 	const filteredLists = lists.filter((list) => list.boardId === boardId);
 	const board = boards.find((b) => b.id === boardId);
 	return (
-		<View style={{ backgroundColor: getBackgroundColor() }}>
+		<View style={{ backgroundColor: getBackgroundColor(isDarkTheme) }}>
 			<ScrollView>
 				<View style={styles.header}>
 					<Image source={{ uri: board.thumbnailPhoto }} resizeMode="cover" style={styles.thumbnail} />
-					<Text style={{ ...styles.boardName, color: getTextColor() }}>
+					<Text style={{ ...styles.boardName, color: getTextColor(isDarkTheme) }}>
 						{board.name}
 					</Text>
-					<Text style={{ ...styles.boardDescription, color: getTextColor() }}>
+					<Text style={{ ...styles.boardDescription, color: getTextColor(isDarkTheme) }}>
 						{board.description}
 					</Text>
 				</View>
@@ -48,9 +48,7 @@ const ListList = ({ boardId, lists, boards, isDarkTheme }) => {
 					keyExtractor={(list) => `${list.name}_${list.id}`}
 					ListEmptyComponent={(
 						<Text h3 style={styles.emptyListText}>
-							You have no lists...
-							{'\n'}
-							Add one!
+							{`'${board.name}' is empty...\nAdd a task list!`}
 						</Text>
 					)}
 				/>
@@ -66,10 +64,10 @@ ListList.propTypes = {
 	isDarkTheme: boolType.isRequired
 };
 
-const mapStateToProps = (state) => ({
-	boards: state.boards,
-	lists: state.lists,
-	isDarkTheme: state.isDarkTheme
+const mapStateToProps = ({ data, theme }) => ({
+	boards: data.boards,
+	lists: data.lists,
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapStateToProps)(ListList);

@@ -1,7 +1,9 @@
-const viewStyle = {
+import { DARK } from './colors';
+
+export const viewStyle = {
 	container: {
 		flex: 1,
-		backgroundColor: '#000000',
+		backgroundColor: 'green',
 		height: '100%'
 	},
 	title: {
@@ -22,4 +24,12 @@ const viewStyle = {
 	}
 };
 
-export default viewStyle;
+export const basicShadowDrop = {
+	shadowColor: DARK,
+	shadowOpacity: 0.5,
+	shadowOffset: {
+		height: 5,
+		width: 0
+	},
+	elevation: 5,
+}

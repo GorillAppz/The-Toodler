@@ -1,15 +1,18 @@
 import React from 'react';
-import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
-import { Button, Text } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { View, Switch } from 'react-native';
-import { toggleDarkTheme } from '../../actions/themeActions';
+
+import Text from '../Text';
+import StyledModal from '../StyledModal';
+
 import styles from './styles';
+import { toggleDarkTheme } from '../../actions/themeActions';
 
 const SettingsModal = ({ isVisible, cancelHandler, toggleDarkTheme, isDarkTheme }) => (
-	<Modal isVisible={isVisible}>
+	<StyledModal isVisible={isVisible} title="Settings">
 		<View style={styles.darkThemeContainer}>
-			<Text style={styles.darkThemeText}> DarkTheme! </Text>
+			<Text style={styles.darkThemeText}> Toggle Dark Theme! </Text>
 			<Switch
 				style={styles.switch}
 				onValueChange={(value) => toggleDarkTheme(value)}
@@ -18,16 +21,16 @@ const SettingsModal = ({ isVisible, cancelHandler, toggleDarkTheme, isDarkTheme 
 		</View>
 		<View>
 			<Button
-				title="Close Modal"
+				title="Save"
 				style={styles.GoButton}
 				onPress={() => cancelHandler()}
 			/>
 		</View>
-	</Modal>
+	</StyledModal>
 );
 
-const mapSateToProps = (state) => ({
-	isDarkTheme: state.isDarkTheme
+const mapSateToProps = ({ theme }) => ({
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapSateToProps, { toggleDarkTheme })(SettingsModal);

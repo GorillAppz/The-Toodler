@@ -7,17 +7,15 @@ import BoardFormModal from '../../components/BoardFormModal';
 import { createBoard } from '../../actions/boardActions';
 import styles from './styles';
 import { createBoardType, boolType } from '../../types';
+import { getBackgroundColor, getLargeAddButtonColor } from '../../helpers/themeColors';
 
 const Boards = ({ createBoard, isDarkTheme }) => {
 	const [showForm, setFormVisibility] = useState(false);
 
 	const submitHandler = (data) => { createBoard(data); setFormVisibility(false); };
 
-	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
-	const getButtonColor = () => (isDarkTheme ? '#3f5745' : '#65b879');
-
 	return (
-		<View style={{ ...styles.container, backgroundColor: getBackgroundColor() }}>
+		<View style={{ ...styles.container, backgroundColor: getBackgroundColor(isDarkTheme) }}>
 			<ScrollView style={styles.main}>
 				<BoardList />
 			</ScrollView>
@@ -25,7 +23,7 @@ const Boards = ({ createBoard, isDarkTheme }) => {
 			<View style={styles.bottom}>
 				<Button
 					onPress={() => setFormVisibility(true)}
-					buttonStyle={{ ...styles.addButton, backgroundColor: getButtonColor() }}
+					buttonStyle={{ ...styles.addButton, backgroundColor: getLargeAddButtonColor(isDarkTheme) }}
 					iconRight
 					icon={{ name: 'add-circle-outline', color: 'white', size: 45 }}
 					title="New Board"
@@ -52,8 +50,8 @@ Boards.navigationOptions = {
 	title: 'Boards'
 };
 
-const mapStateToProps = (state) => ({
-	isDarkTheme: state.isDarkTheme
+const mapStateToProps = ({ theme }) => ({
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapStateToProps, { createBoard })(Boards);

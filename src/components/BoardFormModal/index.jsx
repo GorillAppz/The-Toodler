@@ -1,9 +1,13 @@
 import React from 'react';
-import Modal from 'react-native-modal';
-import { Input, Button, Text } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import { View } from 'react-native';
-import styles from './styles';
+
+import StyledModal from '../StyledModal';
 import ThumbnailInput from '../ThumbnailInput';
+import ModalActionButtons from '../ModalActionButtons';
+
+import styles from './styles';
+
 import { boardType, submitHandlerType, cancelHandlerType, isVisibleType, stringType } from '../../types';
 
 const initState = {
@@ -69,49 +73,41 @@ class BoardFormModal extends React.Component {
 
 		return (
 			<View>
-				<Modal isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
-					<View style={styles.modal}>
-						<Text h3 style={styles.title}>{title}</Text>
-						<Input
-							label="Name"
-							placeholder="Enter board name"
-							value={fields.name}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.name}
-							maxLength={40}
-							onChangeText={(text) => this.inputHandler('name', text)}
-							containerStyle={styles.inputContainer}
-						/>
-						<Input
-							label="Description"
-							placeholder="Enter description (optional)"
-							value={fields.description}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.description}
-							maxLength={100}
-							multiline
-							blurOnSubmit
-							onChangeText={(text) => this.inputHandler('description', text)}
-							containerStyle={styles.inputContainer}
-						/>
+				<StyledModal title={title} isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
+					<Input
+						label="Name"
+						placeholder="Enter board name"
+						value={fields.name}
+						errorStyle={{ color: 'red' }}
+						errorMessage={errors.name}
+						maxLength={40}
+						onChangeText={(text) => this.inputHandler('name', text)}
+						containerStyle={styles.inputContainer}
+					/>
+					<Input
+						label="Description"
+						placeholder="Enter description (optional)"
+						value={fields.description}
+						errorStyle={{ color: 'red' }}
+						errorMessage={errors.description}
+						maxLength={100}
+						multiline
+						blurOnSubmit
+						onChangeText={(text) => this.inputHandler('description', text)}
+						containerStyle={styles.inputContainer}
+					/>
 
-						<ThumbnailInput
-							currImage={fields.thumbnailPhoto}
-							errorMsg={errors.thumbnailPhoto}
-							inputHandler={async (image) => this.inputHandler('thumbnailPhoto', image)}
-						/>
+					<ThumbnailInput
+						currImage={fields.thumbnailPhoto}
+						errorMsg={errors.thumbnailPhoto}
+						inputHandler={async (image) => this.inputHandler('thumbnailPhoto', image)}
+					/>
 
-						<View style={styles.buttonsContainer}>
-							<Button title="Cancel" onPress={() => cancelHandler()} />
-							<Button
-								title="Submit"
-								buttonStyle={styles.submitButton}
-								onPress={() => this.submitForm(fields)}
-							/>
-						</View>
-					</View>
-
-				</Modal>
+					<ModalActionButtons
+						cancelHandler={() => cancelHandler()}
+						submitHandler={() => this.submitForm()}
+					/>
+				</StyledModal>
 			</View>
 		);
 	}

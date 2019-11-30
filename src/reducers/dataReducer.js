@@ -1,11 +1,12 @@
 import * as constants from '../constants';
 import data from '../resources/data.json';
 
-const initState = { ...data, isDarkTheme: false };
+const initState = { ...data };
 
 export default (state = initState, action) => {
 	const newState = { ...state };
 	const { payload, type } = action;
+
 	switch (type) {
 		case constants.CREATE_BOARD: {
 			const highest = Math.max(...state.boards.map((x) => x.id), null);
@@ -68,10 +69,6 @@ export default (state = initState, action) => {
 			newState.tasks = newState.tasks
 				.map((task) => (task.id === payload.taskId ? { ...task, listId: payload.listId } : task));
 			return state.map((task) => (task.id === payload.taskId ? { ...task, listId: payload.listId } : task));
-		}
-		case constants.TOGGLE_DARK_THEME: {
-			newState.isDarkTheme = !newState.isDarkTheme;
-			return newState;
 		}
 		default: {
 			return state;

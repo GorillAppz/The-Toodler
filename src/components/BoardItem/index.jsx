@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableHighlight, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import styles from './styles';
-import { deleteBoard, updateBoard } from '../../actions/boardActions';
+import { View, TouchableHighlight, Image } from 'react-native';
+
+import Text from '../Text';
 import OptionModal from '../OptionModal';
 import BoardFormModal from '../BoardFormModal';
+
+import styles from './styles';
+
+import { deleteBoard, updateBoard } from '../../actions/boardActions';
+
 import { boardType, deleteBoardType, updateBoardType, boolType } from '../../types';
 
 const BoardItem = ({
@@ -41,7 +46,7 @@ const BoardItem = ({
 	};
 
 	return (
-		<View style={styles.boardItem}>
+		<View>
 			<TouchableHighlight
 				onLongPress={() => setActiveModal('option')}
 				onPress={() => navigate('Lists', { id: board.id })}
@@ -71,8 +76,8 @@ BoardItem.propTypes = {
 	isDarkTheme: boolType.isRequired
 };
 
-const mapStateToProps = (state) => ({
-	isDarkTheme: state.isDarkTheme
+const mapStateToProps = ({ theme }) => ({
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapStateToProps, { deleteBoard, updateBoard })(withNavigation(BoardItem));

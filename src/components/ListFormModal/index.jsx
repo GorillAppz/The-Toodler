@@ -1,10 +1,14 @@
 import React from 'react';
-import Modal from 'react-native-modal';
-import { Input, Button, Text } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import { View } from 'react-native';
 import { ColorPicker, fromHsv } from 'react-native-color-picker';
 
+import Text from '../Text';
+import StyledModal from '../StyledModal';
+import ModalActionButtons from '../ModalActionButtons';
+
 import styles from './styles';
+
 import { listType, numberType, funcType, boolType, stringType } from '../../types';
 
 const initState = {
@@ -69,43 +73,33 @@ class ListFormModal extends React.Component {
 		const { isVisible, cancelHandler, title } = this.props;
 
 		return (
-			<View>
-				<Modal isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
-					<View style={styles.modal}>
-						<Text h3 style={styles.title}>{title}</Text>
-						<Input
-							label="Name"
-							placeholder="Enter board name"
-							value={fields.name}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.name}
-							maxLength={40}
-							onChangeText={(text) => this.inputHandler('name', text)}
-							containerStyle={styles.inputContainer}
-						/>
-						<View style={styles.colorPickerContainer}>
-							<Text h5 style={styles.colorPickerTitle}>
-								Choose your List Color
+			<StyledModal title={title} isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
+				<Input
+					label="Name"
+					placeholder="Enter list name"
+					value={fields.name}
+					errorStyle={{ color: 'red' }}
+					errorMessage={errors.name}
+					maxLength={40}
+					onChangeText={(text) => this.inputHandler('name', text)}
+					containerStyle={styles.inputContainer}
+				/>
+				<View style={styles.colorPickerContainer}>
+					<Text h5 style={styles.colorPickerTitle}>
+						Choose your List Color
 							</Text>
-							<ColorPicker
-								color={fields.color}
-								onColorChange={(value) => this.colorChangeHandler(value)}
-								style={styles.colorPicker}
-							/>
-						</View>
+					<ColorPicker
+						color={fields.color}
+						onColorChange={(value) => this.colorChangeHandler(value)}
+						style={styles.colorPicker}
+					/>
+				</View>
 
-						<View style={styles.buttonsContainer}>
-							<Button title="Cancel" onPress={() => cancelHandler()} />
-							<Button
-								title="Submit"
-								buttonStyle={styles.submitButton}
-								onPress={() => this.submitForm()}
-							/>
-						</View>
-					</View>
-
-				</Modal>
-			</View>
+				<ModalActionButtons
+					submitHandler={() => this.submitForm()}
+					cancelHandler={() => cancelHandler()}
+				/>
+			</StyledModal>
 		);
 	}
 }

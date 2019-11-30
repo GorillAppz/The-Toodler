@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import tinyColor from 'tinycolor2';
-import styles from './styles';
-import { deleteList, updateList } from '../../actions/listActions';
-import OptionModal from '../OptionModal';
+
+import Text from '../Text';
 import ListFormModal from '../ListFormModal';
-import { deleteListType, listType, funcType, boolType, updateListType } from '../../types';
+import OptionModal from '../OptionModal';
 import TaskList from '../TaskList/index';
+
+import styles from './styles';
+import { LIGHT, DARK } from '../../styles/colors';
+import { deleteList, updateList } from '../../actions/listActions';
+
+import { deleteListType, listType, funcType, boolType, updateListType } from '../../types';
 
 const ListItem = ({ list, deleteList, updateList, expandHandler, expanded, isDarkTheme }) => {
 	const [activeModal, setActiveModal] = useState('');
+
+	const getTextColor = () => (tinyColor(list.color).isDark() ? LIGHT : DARK);
 
 	const modalToShow = () => {
 		if (activeModal === 'option') {
@@ -40,26 +47,24 @@ const ListItem = ({ list, deleteList, updateList, expandHandler, expanded, isDar
 		return null;
 	};
 
-	const getTextColor = () => (tinyColor(list.color).isDark() ? 'white' : 'black');
-
-	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
-
 	return (
-		<View style={{ ...styles.container, backgroundColor: getBackgroundColor() }}>
+		<View style={{ ...styles.container, backgroundColor: list.color }}>
 			<TouchableHighlight
 				onLongPress={() => setActiveModal('option')}
 				onPress={() => expandHandler(list.id)}
 			>
-				<View style={{ backgroundColor: list.color }}>
-					<View style={styles.nameWrapper}>
-						<Text style={{ ...styles.name, color: getTextColor() }}>
-							{list.name}
-						</Text>
-						<Icon name={expanded ? 'caret-up' : 'caret-down'} type="font-awesome" color={getTextColor()} />
-					</View>
+				<View style={styles.nameWrapper}>
+					<Text style={{ ...styles.name, color: getTextColor() }}>
+						{list.name}
+					</Text>
+					<Icon
+						name={expanded ? 'caret-up' : 'caret-down'}
+						type="font-awesome"
+						color={getTextColor(isDarkTheme)}
+					/>
 				</View>
 			</TouchableHighlight>
-			{expanded ? <TaskList listId={list.id} /> : null}
+			{expanded ? <TaskList listId={list.id} listColor={list.color} /> : null}
 			{modalToShow()}
 		</View>
 	);
@@ -75,8 +80,8 @@ ListItem.propTypes = {
 	isDarkTheme: boolType.isRequired
 };
 
-const mapStateToProps = (state) => ({
-	isDarkTheme: state.isDarkTheme
+const mapStateToProps = ({ theme }) => ({
+	isDarkTheme: theme.isDarkTheme
 });
 
 export default connect(mapStateToProps, { deleteList, updateList })(withNavigation(ListItem));

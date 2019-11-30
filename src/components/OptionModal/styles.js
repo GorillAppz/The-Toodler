@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { GREEN, AMBER, RED, LIGHT, DARK } from '../../styles/colors';
 
 export default StyleSheet.create({
 	title: {
 		textAlign: 'center',
-		color: 'white',
+		color: LIGHT,
 		fontWeight: 'bold'
 	},
 	modal: {
@@ -19,12 +20,12 @@ export default StyleSheet.create({
 		marginLeft: 10
 	},
 	delete: {
-		backgroundColor: 'red'
+		backgroundColor: RED
 	},
 	edit: {
-		backgroundColor: 'green'
+		backgroundColor: GREEN
 	},
 	move: {
-		backgroundColor: '#ffb347'
+		backgroundColor: AMBER
 	}
 });

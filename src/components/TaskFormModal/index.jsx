@@ -1,9 +1,11 @@
 import React from 'react';
-import Modal from 'react-native-modal';
-import { Input, Button, Text } from 'react-native-elements';
-import { View } from 'react-native';
+import StyledModal from '../StyledModal';
+import { Input } from 'react-native-elements';
+
+import ModalActionButtons from '../ModalActionButtons';
 
 import styles from './styles';
+
 import { taskType, numberType, funcType, boolType, stringType } from '../../types';
 
 const initState = {
@@ -69,44 +71,36 @@ class TaskFormModal extends React.Component {
 		const { isVisible, cancelHandler, title } = this.props;
 
 		return (
-			<View>
-				<Modal isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
-					<View style={styles.modal}>
-						<Text h3 style={styles.title}>{title}</Text>
-						<Input
-							label="Name"
-							placeholder="Enter board name"
-							value={fields.name}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.name}
-							maxLength={40}
-							onChangeText={(text) => this.inputHandler('name', text)}
-							containerStyle={styles.inputContainer}
-						/>
+			<StyledModal title={title} isVisible={isVisible} onModalShow={() => this.setStateOnModalShow()}>
+				<Input
+					label="Name"
+					placeholder="Enter task name"
+					value={fields.name}
+					errorStyle={{ color: 'red' }}
+					errorMessage={errors.name}
+					maxLength={40}
+					onChangeText={(text) => this.inputHandler('name', text)}
+					containerStyle={styles.inputContainer}
+				/>
 
-						<Input
-							label="Description"
-							placeholder="Enter description"
-							value={fields.description}
-							errorStyle={{ color: 'red' }}
-							errorMessage={errors.description}
-							maxLength={40}
-							onChangeText={(text) => this.inputHandler('description', text)}
-							containerStyle={styles.inputContainer}
-						/>
+				<Input
+					label="Description"
+					placeholder="Enter description"
+					value={fields.description}
+					errorStyle={{ color: 'red' }}
+					errorMessage={errors.description}
+					maxLength={100}
+					multiline
+					blurOnSubmit
+					onChangeText={(text) => this.inputHandler('description', text)}
+					containerStyle={styles.inputContainer}
+				/>
 
-						<View style={styles.buttonsContainer}>
-							<Button title="Cancel" onPress={() => cancelHandler()} />
-							<Button
-								title="Submit"
-								buttonStyle={styles.submitButton}
-								onPress={() => this.submitForm()}
-							/>
-						</View>
-					</View>
-
-				</Modal>
-			</View>
+				<ModalActionButtons
+					cancelHandler={() => cancelHandler()}
+					submitHandler={() => this.submitForm()}
+				/>
+			</StyledModal>
 		);
 	}
 }

@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import styles from './styles';
-import logo from '../../resources/logo.png';
+import logo from '../../resources/menu_screen.png';
 import SettingsModal from '../../components/SettingsModal';
+import { LIGHT } from '../../styles/colors';
 
 const Main = ({ navigation: { navigate } }) => {
 	const [showModal, setShowModal] = useState(false);
 	return (
-		<ImageBackground source={logo} style={styles.logo} resizeMode="stretch">
+		<ImageBackground source={logo} style={styles.logo} resizeMode="cover">
 			<View>
 				<View style={styles.settingContainer}>
 					<Button
 						onPress={() => setShowModal(true)}
-						icon={<Icon name="settings" size={55} color="#33312d" iconStyle={styles.icon} />}
+						icon={<Icon name="settings" size={55} color={LIGHT} iconStyle={styles.icon} />}
 						buttonStyle={{ backgroundColor: 'transparent' }}
 					/>
 				</View>
@@ -21,7 +22,7 @@ const Main = ({ navigation: { navigate } }) => {
 					<Button
 						onPress={() => navigate('Boards')}
 						buttonStyle={styles.button}
-						title="Visit The Toodler!"
+						title="Enter The Toodler!"
 						titleStyle={styles.buttonTitle}
 					/>
 				</View>
@@ -35,12 +36,9 @@ const Main = ({ navigation: { navigate } }) => {
 };
 
 Main.navigationOptions = {
-	headerStyle: {
-		backgroundColor: '#7F2982',
-		borderBottomColor: 'transparent',
-		borderBottomWidth: 0,
-		shadowColor: 0,
-		elevation: 0
-	}
+	navigationOptions: {
+		headerShown: false
+	},
+	headerShown: false
 };
 export default Main;

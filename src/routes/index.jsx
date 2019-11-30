@@ -3,6 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Boards from '../views/Boards';
 import Lists from '../views/Lists';
 import Main from '../views/Main';
+import { Platform } from 'react-native';
+
+import { LIGHT, PURPLE } from '../styles/colors';
 
 const MainNavigator = createStackNavigator(
 	{
@@ -15,11 +18,17 @@ const MainNavigator = createStackNavigator(
 		/* The header config from HomeScreen is now here */
 		defaultNavigationOptions: {
 			headerStyle: {
-				backgroundColor: '#9CC69B'
+				backgroundColor: PURPLE
 			},
-			headerTintColor: '#1f2d3d',
+			headerTintColor: LIGHT,
 			headerTitleStyle: {
-				fontWeight: 'bold'
+				fontWeight: 'bold',
+				alignSelf: 'center',
+				fontFamily: 'Roboto',
+				...Platform.select({
+					ios: { fontFamily: 'Helvetica Neue' },
+					android: { fontFamily: 'Roboto' }
+				})
 			}
 		}
 	}

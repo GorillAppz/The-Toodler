@@ -1,19 +1,23 @@
 import { StyleSheet } from 'react-native';
+import { LIGHT, DARK } from '../../styles/colors';
+import { INPUT_MODAL_TITLE } from '../../styles/fonts';
 
 export default StyleSheet.create({
 	darkThemeText: {
-		color: 'white',
+		color: DARK,
 		fontSize: 18,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		marginBottom: 20
 	},
 	darkThemeContainer: {
-		flex: 1,
-		alignItems: 'flex-end',
-		justifyContent: 'flex-start',
-		marginVertical: 100
+		display: 'flex',
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignItems: 'center',
+		padding: 30
 	},
 	switch: {
-		transform: [{ scaleX: 1.5 }, { scaleY: 1 }],
+		transform: [{ scale: 1.5 }],
 		marginEnd: 10
 	}
 });

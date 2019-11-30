@@ -1,7 +1,7 @@
 /* Centralized PropTypes Declaration */
 import PropTypes from 'prop-types';
 
-const { shape, number, string, bool, arrayOf, func } = PropTypes;
+const { shape, number, string, bool, arrayOf, func, node } = PropTypes;
 
 export const boardType = shape({
 	id: number.isRequired,
@@ -59,3 +59,4 @@ export const stringType = string;
 export const numberType = number;
 export const funcType = func;
 export const boolType = bool;
+export const nodeType = node;

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import commonViewStyles from '../../styles/commonViewStyles';
+import { viewStyle } from '../../styles';
 
 export default StyleSheet.create({
-	...commonViewStyles
+	...viewStyle
 });

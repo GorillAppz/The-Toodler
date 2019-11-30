@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { Text, Button } from 'react-native-elements';
-import PropTypes from 'prop-types';
+import { Button } from 'react-native-elements';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 
-import imagePlaceholder from '../../resources/image_placeholder.gif';
+import Text from '../Text';
 
 import styles from './styles';
+
+import { stringType, funcType } from '../../types';
 
 const ThumbnailInput = ({ currImage, errorMsg, inputHandler }) => {
 	const _takePhotoHandler = async () => {
@@ -21,22 +22,27 @@ const ThumbnailInput = ({ currImage, errorMsg, inputHandler }) => {
 		<View style={styles.container}>
 			<Text h6 style={styles.label}>Select Thumbnail</Text>
 			<Text style={styles.errorMsg}>{errorMsg}</Text>
-			<Image
-				style={styles.image}
-				source={currImage.length
-					? { uri: currImage }
-					: imagePlaceholder}
-			/>
+			{
+				currImage.length
+					?
+					<Image
+						style={styles.image}
+						source={currImage.length
+							? { uri: currImage }
+							: null}
+					/>
+					: null
+			}
 			<View style={styles.buttonsContainer}>
 				<Button
 					style={styles.button}
-					icon={{ name: 'camera-alt', color: 'grey', size: 30 }}
+					icon={{ name: 'camera-alt', color: 'grey', size: 45 }}
 					onPress={async () => _takePhotoHandler()}
 					type="outline"
 				/>
 				<Button
 					style={styles.button}
-					icon={{ name: 'insert-photo', color: 'grey', size: 30 }}
+					icon={{ name: 'insert-photo', color: 'grey', size: 45 }}
 					type="outline"
 					onPress={async () => _cameraRollHandler()}
 				/>
@@ -46,9 +52,9 @@ const ThumbnailInput = ({ currImage, errorMsg, inputHandler }) => {
 };
 
 ThumbnailInput.propTypes = {
-	currImage: PropTypes.string.isRequired,
-	errorMsg: PropTypes.string.isRequired,
-	inputHandler: PropTypes.func.isRequired
+	currImage: stringType.isRequired,
+	errorMsg: stringType.isRequired,
+	inputHandler: funcType.isRequired
 };
 
 export default ThumbnailInput;

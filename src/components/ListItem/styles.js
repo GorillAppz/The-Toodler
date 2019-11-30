@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
+import { basicShadowDrop } from '../../styles';
 
 export default StyleSheet.create({
 	container: {
+		...basicShadowDrop,
 		display: 'flex',
-		borderBottomWidth: 1,
-		borderBottomColor: 'lightgray'
+		marginBottom: 7.5
 	},
 	nameWrapper: {
 		alignItems: 'center',
-		paddingTop: 5
+		paddingTop: 5,
 	},
 	name: {
 		fontWeight: 'bold',

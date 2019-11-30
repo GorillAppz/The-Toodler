@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
-import styles from './styles';
-import { deleteTask, updateTask } from '../../actions/taskActions';
+
 import OptionModal from '../OptionModal';
-import { taskType, deleteTaskType, updateIsFinishedType, updateTaskType } from '../../types';
 import TaskFormModal from '../TaskFormModal';
 import MoveTaskModal from '../MoveTaskModal';
+
+import styles from './styles';
+import { GREEN } from '../../styles/colors';
+
+import { deleteTask, updateTask } from '../../actions/taskActions';
+import { taskType, deleteTaskType, updateIsFinishedType, updateTaskType } from '../../types';
 
 const TaskItem = ({ task, deleteTask, updateTask, updateIsFinished }) => {
 	const [activeModal, setActiveModal] = useState('');
@@ -51,7 +55,6 @@ const TaskItem = ({ task, deleteTask, updateTask, updateIsFinished }) => {
 					currentListId={task.listId}
 					cancelHandler={() => setActiveModal('')}
 					submitHandler={(newListId) => { updateTaskListId(newListId); setActiveModal(''); }}
-					title="Moving Task"
 				/>
 			);
 		}
@@ -63,10 +66,11 @@ const TaskItem = ({ task, deleteTask, updateTask, updateIsFinished }) => {
 			<View style={styles.item}>
 				<View style={styles.nameWrapper}>
 					<CheckBox
-						title={task.name}
+						title={`${task.name} \n- ${task.description}`}
 						checked={task.isFinished}
 						onPress={() => updateIsFinished(task.id)}
 						onLongPress={() => setActiveModal('option')}
+						checkedColor={GREEN}
 					/>
 				</View>
 			</View>

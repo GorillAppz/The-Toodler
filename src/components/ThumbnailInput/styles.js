@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { GRAY } from '../../styles/colors';
 
 export default StyleSheet.create({
 	container: {
@@ -10,13 +11,14 @@ export default StyleSheet.create({
 	image: {
 		width: 200,
 		height: 200,
-		margin: 20,
+		marginBottom: 20,
 		borderRadius: 10
 	},
 	label: {
 		fontSize: 20,
-		color: 'grey',
-		fontWeight: 'bold'
+		color: GRAY,
+		fontWeight: 'bold',
+		marginBottom: 0
 	},
 	buttonsContainer: {
 		display: 'flex',

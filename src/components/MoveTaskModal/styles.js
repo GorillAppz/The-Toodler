@@ -1,22 +1,11 @@
 import { StyleSheet } from 'react-native';
-
+import { INPUT_MODAL_TITLE } from '../../styles/fonts';
 export default StyleSheet.create({
-	modal: {
-		backgroundColor: 'white',
-		borderRadius: 10,
-		padding: 10,
-		height: 'auto'
-	},
 	infoContainer: {
 		marginVertical: 10
 	},
-	title: {
-		fontWeight: 'bold',
-		textAlign: 'center'
-	},
 	oldListName: {
-		fontWeight: 'bold',
-		textAlign: 'center',
+		...INPUT_MODAL_TITLE,
 		marginTop: 5
 	}
 });

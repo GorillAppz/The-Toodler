@@ -1,39 +1,21 @@
 import { StyleSheet } from 'react-native';
+import { GRAY } from '../../styles/colors';
 
 export default StyleSheet.create({
-	modal: {
-		backgroundColor: 'white',
-		borderRadius: 10,
-		padding: 10,
-		display: 'flex',
-		flexDirection: 'column'
-	},
 	inputContainer: {
 		margin: 5
-	},
-	buttonsContainer: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		width: '100%'
-	},
-	submitButton: {
-		backgroundColor: 'green'
-	},
-	title: {
-		color: 'grey',
-		textAlign: 'center'
 	},
 	colorPickerContainer: {
 		marginVertical: 10
 	},
 	colorPickerTitle: {
 		textAlign: 'center',
-		color: 'gray',
 		fontWeight: 'bold',
+		color: GRAY,
 		marginTop: 5
 	},
 	colorPicker: {
-		height: 250
+		height: 250,
+		marginVertical: 10
 	}
 });

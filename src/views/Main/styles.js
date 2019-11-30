@@ -1,21 +1,25 @@
 import { StyleSheet } from 'react-native';
+import { LIGHT, DARK, BLUE, PURPLE } from '../../styles/colors';
+import { basicShadowDrop } from '../../styles';
 
 export default StyleSheet.create({
 	logo: {
 		flex: 1,
-		alignSelf: 'stretch',
-		width: undefined,
-		height: undefined
+		alignSelf: 'stretch'
 	},
 	button: {
+		...basicShadowDrop,
 		height: 75,
 		width: 300,
-		borderRadius: 30
+		borderRadius: 30,
+		backgroundColor: PURPLE,
+		borderColor: LIGHT,
+		borderWidth: 2
 	},
 	buttonTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: 'black'
+		color: LIGHT
 	},
 	icon: {
 		backgroundColor: 'transparent'
@@ -24,7 +28,8 @@ export default StyleSheet.create({
 		display: 'flex',
 		alignItems: 'flex-end',
 		justifyContent: 'flex-start',
-		height: '75%'
+		paddingTop: '10%',
+		height: '87.5%'
 	},
 	visitButtonContainer: {
 		display: 'flex',
