@@ -14,7 +14,12 @@ const MoveTaskModal = ({ isVisible, currentListId, submitHandler, cancelHandler,
 	const filteredLists = lists.filter((list) => list.boardId === currentListObj.boardId);
 
 	return (
-		<StyledModal title={`Moving '${currentListObj.name}' to...`} isVisible={isVisible}>
+		<StyledModal
+			title={`Moving '${currentListObj.name}' to...`}
+			isVisible={isVisible}
+			onBackdropPress={() => cancelHandler()}
+			onBackButtonPress={() => cancelHandler()}
+		>
 			<Picker selectedValue={selectedList} onValueChange={(listId) => setSelectedList(listId)}>
 				{filteredLists.map((x) => (
 					<Picker.Item label={x.name} value={x.id} key={`${x.name}_${x.id}_picker`} />
