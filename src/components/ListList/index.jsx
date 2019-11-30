@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import ListItem from '../ListItem';
 import styles from './styles';
-<<<<<<< HEAD
-import { listsType, numberType, boardsType } from '../../types';
-=======
-import ListFormModal from '../ListFormModal';
 import { listsType, numberType, boardsType, boolType } from '../../types';
->>>>>>> 68575c23c7944b179aa8290040d4ee81f9b3a2ee
 
 const ListList = ({ boardId, lists, boards, isDarkTheme }) => {
 	const [taskListToExpand, setTaskListToExpand] = useState(null);
