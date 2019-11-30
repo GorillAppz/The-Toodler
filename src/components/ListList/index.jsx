@@ -5,10 +5,14 @@ import { Text } from 'react-native-elements';
 import ListItem from '../ListItem';
 import styles from './styles';
 import ListFormModal from '../ListFormModal';
-import { listsType, numberType, boardsType } from '../../types';
+import { listsType, numberType, boardsType, boolType } from '../../types';
 
-const ListList = ({ boardId, lists, boards }) => {
+const ListList = ({ boardId, lists, boards, isDarkTheme }) => {
 	const [taskListToExpand, setTaskListToExpand] = useState(null);
+
+	const getBackgroundColor = () => (isDarkTheme ? 'black' : 'white');
+	const getTextColor = () => (isDarkTheme ? 'white' : 'black');
+
 
 	const expandListHandler = (listId) => {
 		if (listId === taskListToExpand) {
@@ -21,14 +25,14 @@ const ListList = ({ boardId, lists, boards }) => {
 	const filteredLists = lists.filter((list) => list.boardId === boardId);
 	const board = boards.find((b) => b.id === boardId);
 	return (
-		<View>
+		<View style={{ backgroundColor: getBackgroundColor() }}>
 			<ScrollView>
 				<View style={styles.header}>
 					<Image source={{ uri: board.thumbnailPhoto }} resizeMode="cover" style={styles.thumbnail} />
-					<Text style={styles.boardName}>
+					<Text style={{ ...styles.boardName, color: getTextColor() }}>
 						{board.name}
 					</Text>
-					<Text style={styles.boardDescription}>
+					<Text style={{ ...styles.boardDescription, color: getTextColor() }}>
 						{board.description}
 					</Text>
 				</View>
@@ -60,12 +64,14 @@ const ListList = ({ boardId, lists, boards }) => {
 ListList.propTypes = {
 	lists: listsType.isRequired,
 	boardId: numberType.isRequired,
-	boards: boardsType.isRequired
+	boards: boardsType.isRequired,
+	isDarkTheme: boolType.isRequired
 };
 
 const mapStateToProps = (state) => ({
 	boards: state.boards,
-	lists: state.lists
+	lists: state.lists,
+	isDarkTheme: state.isDarkTheme
 });
 
 export default connect(mapStateToProps)(ListList);
