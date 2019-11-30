@@ -1,61 +1,67 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
 
 import StyledModal from '../StyledModal';
 import Text from '../Text';
 
 import { boolType, funcType } from '../../types';
 
-import howToText from '../../resources/how-to.yml';
+import howToText from '../../resources/readme.json';
+import styles from './styles';
 
 const infoModal = ({ isVisible, cancelHandler }) => (
 	<StyledModal
-		title="Toodler How To"
+		title="The Toodler"
 		isVisible={isVisible}
 		onBackdropPress={() => cancelHandler()}
 		onBackButtonPress={() => cancelHandler()}
 	>
-		<ScrollView>
+		<ScrollView style={styles.container}>
 
-			<Text h3>About</Text>
+			<Text style={styles.sectionTitle}>About</Text>
 			{
 				howToText.About.map((x) => (
-					<Text>
-						{x}
+					<Text style={styles.sectionText} key={x}>
+						{`${x}`}
 					</Text>
 				))
 			}
 
-			<Text h4>Welcome screen</Text>
+			<Text style={styles.sectionTitle}>Welcome screen</Text>
 
 			{
 				howToText.Home.map((x) => (
-					<Text>
-						{x}
+					<Text style={styles.sectionText} key={x}>
+						{`${x}`}
 					</Text>
 				))
 			}
 
-			<Text h4>Boards Screen</Text>
+			<Text style={styles.sectionTitle}>Boards Screen</Text>
 
 			{
 				howToText.Boards.map((x) => (
-					<Text>
-						{x}
+					<Text style={styles.sectionText} key={x}>
+						{`${x}`}
 					</Text>
 				))
 			}
 
-			<Text h4>Task List & Tasks</Text>
+			<Text style={styles.sectionTitle}>Task List & Tasks</Text>
 
 			{
 				howToText.TaskLists.map((x) => (
-					<Text>
-						{x}
+					<Text style={styles.sectionText} key={x}>
+						{`${x}`}
 					</Text>
 				))
 			}
 
+			<Button
+				title="Close"
+				style={styles.closeButton}
+			/>
 		</ScrollView>
 	</StyledModal>
 );

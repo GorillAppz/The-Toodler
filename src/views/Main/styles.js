@@ -3,6 +3,9 @@ import { LIGHT, PURPLE } from '../../styles/colors';
 import { basicShadowDrop } from '../../styles';
 
 export default StyleSheet.create({
+	container: {
+		flex: 1
+	},
 	logo: {
 		flex: 1,
 		alignSelf: 'stretch'
@@ -29,7 +32,7 @@ export default StyleSheet.create({
 		alignItems: 'flex-end',
 		justifyContent: 'flex-start',
 		paddingTop: '10%',
-		height: '81.5%'
+		height: '80%'
 	},
 	bottomButtonContainer: {
 		display: 'flex',

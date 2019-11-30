@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
-import styles from './styles';
-import logo from '../../resources/menu_screen.png';
+
 import SettingsModal from '../../components/SettingsModal';
+import InfoModal from '../../components/InfoModal';
+
+import logo from '../../resources/menu_screen.png';
+import styles from './styles';
 import { LIGHT } from '../../styles/colors';
 
 const Main = ({ navigation: { navigate } }) => {
@@ -12,7 +15,7 @@ const Main = ({ navigation: { navigate } }) => {
 	const modalToShow = () => {
 		if (activeModal === 'readMe') {
 			return (
-				<SettingsModal
+				<InfoModal
 					isVisible
 					cancelHandler={() => setActiveModal('')}
 				/>
@@ -31,7 +34,7 @@ const Main = ({ navigation: { navigate } }) => {
 
 	return (
 		<ImageBackground source={logo} style={styles.logo} resizeMode="cover">
-			<View>
+			<View style={styles.container}>
 				<View style={styles.settingContainer}>
 					<Button
 						onPress={() => setActiveModal('settings')}
