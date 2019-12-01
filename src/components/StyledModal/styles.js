@@ -8,7 +8,8 @@ export default StyleSheet.create({
 		borderRadius: 10,
 		padding: 10,
 		display: 'flex',
-		flexDirection: 'column'
+		flexDirection: 'column',
+		maxHeight: '95%'
 	},
 	modalHeader: {
 		...INPUT_MODAL_TITLE

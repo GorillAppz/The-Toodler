@@ -10,7 +10,7 @@ export default StyleSheet.create({
 		margin: 5
 	},
 	closeButton: {
-		marginTop: 10
+		marginVertical: 20
 	},
 	container: {
 		padding: 20
